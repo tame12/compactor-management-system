@@ -8,12 +8,13 @@ This project aims to solve a problem that SGH-Physiotherapy department is curren
 
 
 # Packages and Libraries Used
-## Frontend
+## Frontend (General)
 1. react-router-dom [docs](https://v5.reactrouter.com/web/guides/quick-start)
 2. react-boostrap [docs](https://react-bootstrap.github.io/components/navbar/)
 3. react-router-boostrap [docs](https://github.com/react-bootstrap/react-router-bootstrap)
 
-
+### Dashboard Page 
+1. Recharts [docs](https://recharts.org/en-US/guide)
 
 ## Backend
 1. add in ....
