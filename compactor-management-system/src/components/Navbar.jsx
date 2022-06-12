@@ -9,7 +9,7 @@ const NavbarComponent = () => {
         <div>
             <Navbar bg="light" expand="lg">
                 <Container>
-                    <Navbar.Brand>React-Bootstrap</Navbar.Brand>
+                    <Navbar.Brand>SGH Compactor Management System</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mx-auto">

@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.chart-container{
+  text-align: center;
+}
+
+.label {
+  font-family: sans-serif
+}
+.container {
+  border: 1px solid #f4f4f4;
+  width: 400px;
+}
