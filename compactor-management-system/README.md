@@ -7,6 +7,16 @@ This project aims to solve a problem that SGH-Physiotherapy department is curren
 2. Run `npm start` once packages have been installed
 
 
+# Packages and Libraries Used
+## Frontend
+1. react-router-dom [docs](https://v5.reactrouter.com/web/guides/quick-start)
+2. react-boostrap [docs](https://react-bootstrap.github.io/components/navbar/)
+3. react-router-boostrap [docs](https://github.com/react-bootstrap/react-router-bootstrap)
+
+
+
+## Backend
+1. add in ....
 
 # Getting Started with Create React App
 
