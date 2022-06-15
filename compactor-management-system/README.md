@@ -3,7 +3,7 @@
 This project aims to solve a problem that SGH-Physiotherapy department is currently having with asset tracking.
 
 # How to Start App on Local Machine
-1. Open new Terminal and run `npm install`
+1. Open new Terminal and run `npm install --force`
 2. Run `npm start` once packages have been installed
 
 
