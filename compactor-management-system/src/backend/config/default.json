@@ -1,4 +1,0 @@
-{
-  "mongoURI":
-    "mongodb+srv://heap:heappassword@my-cluster.i0ioa.mongodb.net/Equipment?retryWrites=true&w=majority"
-}
