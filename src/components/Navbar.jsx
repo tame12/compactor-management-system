@@ -28,6 +28,10 @@ const NavbarComponent = () => {
                             <LinkContainer to="/logs">
                                 <Nav.Link>Logs</Nav.Link>
                             </LinkContainer>
+
+                            <LinkContainer to="/Login">
+                                <Nav.Link>Login</Nav.Link>
+                            </LinkContainer>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
