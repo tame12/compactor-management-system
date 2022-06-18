@@ -3,9 +3,12 @@ import jwt_decode from "jwt-decode"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const google = window.google;
+
 // require('dotenv').config()
-console.log(process.env)
-console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID)
+
+// please dont print me when pushing cos its automatically deployed into a public URL :c
+// console.log(process.env)
+// console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID)
 
 
 const Login = () => {
