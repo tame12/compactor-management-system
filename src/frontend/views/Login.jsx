@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import jwt_decode from "jwt-decode"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const google = window.google;
 // require('dotenv').config()
@@ -8,7 +9,7 @@ console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID)
 
 
 const Login = () => {
-  // state isnt good for using across components, if authentication system is outside of google use global state/redox/cache instead of state.
+  // state isnt good for using across components, if authentication system is outside of google use global state/redux/cache instead of state.
   const [ user, setUser ] = useState({});
   
   function handleCallbackResponse(response){
@@ -36,7 +37,19 @@ const Login = () => {
 
   return (
     <div className="App">
-      <div id="signInDiv"></div>
+      {/* <div className="container border-0"> */}
+        {/* <div id="signInDiv" className="text-center"></div> */}
+        <div id="signInDiv" className="text-center btn" type="button"> </div>
+        
+      {/* </div> */}
+
+      <div className="container border-0">
+        {/* <div id="signInDiv" className="text-center"></div> */}
+        {/* <div id="signInDiv" style={{margin: "0 auto"}} className="text-center"></div> */}
+        {/* <button className="btn btn-primary">
+          hi</button> */}
+        
+      </div>
       {
         user &&
         <div>
