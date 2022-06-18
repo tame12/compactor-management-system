@@ -26,11 +26,16 @@
     "validation": "0.0.1",
     "web-vitals": "^2.1.4"
   },
+  "engines": {
+    "node": "^16.x",
+    "npm": "^6.x"
+  },
   "devDependencies": {
     "nodemon": "^1.19.4"
   },
   "scripts": {
     "start": "env-cmd -f .env react-scripts start",
+    "heroku-custom-start": "react-scripts build",
     "build:staging": "env-cmd -f .env react-scripts build",
     "build:production": "env-cmd -f .env.production react-scripts build",
     "test": "react-scripts test",
