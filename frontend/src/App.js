@@ -4,11 +4,11 @@ import {BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 // Components
 import NavbarComponent from './components/Navbar';
 // Views
-import Dashboard from './frontend/views/Dashboard';
-import Logs from './frontend/views/Logs';
-import StockIn from './frontend/views/StockIn';
-import StockOut from './frontend/views/StockOut';
-import Login from './frontend/views/Login';
+import Dashboard from './UI/views/Dashboard';
+import Logs from './UI/views/Logs';
+import StockIn from './UI/views/StockIn';
+import StockOut from './UI/views/StockOut';
+import Login from './UI/views/Login';
 // require('dotenv').config()
 
 
