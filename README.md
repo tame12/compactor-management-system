@@ -3,14 +3,19 @@
 This project aims to solve a problem that SGH-Physiotherapy department is currently having with asset tracking.
 
 # Things to note when pushing
-2. https://sgh-compactor-manager-system.herokuapp.com/
-1. make sure app can run before pushing because heroku has not been configured to make checks (to do)
-2. If dependencies are added, please update the package.json and package-lock.json with `npm install` and push them both as heroku will use them to install the dependencies and rebuild the website at every push, and will crash if the build is unsuccessful (to be configured)
-3. If api keys or sensative data are needed, put into .env and send to tele group, it will need to be added into heroku
+1. https://sgh-compactor-manager-system.herokuapp.com/
+2. make sure app can run before pushing because heroku has not been configured to make checks (to do)
+3. If dependencies are added, please update the package.json and package-lock.json with `npm install` and push them both as heroku will use them to install the dependencies and rebuild the website at every push, and will crash if the build is unsuccessful (to be configured)
+4. If api keys or sensative data are needed, put into .env and send to tele group, it will need to be added into heroku
+
+
 
 # How to Start App on Local Machine
-1. Open new Terminal and run `npm install --force`
-2. Run `npm start` once packages have been installed
+1. Open new Terminal and run `npm install`.
+2. In the same terminal run `npm run serve` this will setup API connection with MongoDB. 
+3. Create a new terminal and cd into the frontend folder.
+4. Run `npm install` .
+5. After packages are installed, run `npm run start` this will setup the frontend react web application.
 
 
 # Packages and Libraries Used

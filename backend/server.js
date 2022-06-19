@@ -1,7 +1,8 @@
 // app.js
 const express = require('express');
 const path = require("path")
-const dotenv = require('dotenv').config({ path: path.resolve(__dirname, '..', '.env')});
+// const dotenv = require('dotenv').config({ path: path.resolve(__dirname, '..', '.env')});
+const dotenv = require('dotenv').config();
 const connectDB = require('./config/db');
 const cors = require('cors');
 const port = process.env.PORT || 8082;
