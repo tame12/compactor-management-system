@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import jwt_decode from "jwt-decode"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import login_image from "../img/login-page.png";
+
 const google = window.google;
 
 // require('dotenv').config()
@@ -9,7 +11,6 @@ const google = window.google;
 // please dont print me when pushing cos its automatically deployed into a public URL :c
 // console.log(process.env)
 // console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID)
-
 
 const Login = () => {
   // state isnt good for using across components, if authentication system is outside of google use global state/redux/cache instead of state.
@@ -40,19 +41,20 @@ const Login = () => {
 
   return (
     <div className="App">
-      {/* <div className="container border-0"> */}
-        {/* <div id="signInDiv" className="text-center"></div> */}
-        <div id="signInDiv" className="text-center btn" type="button"> </div>
-        
-      {/* </div> */}
-
-      <div className="container border-0">
-        {/* <div id="signInDiv" className="text-center"></div> */}
-        {/* <div id="signInDiv" style={{margin: "0 auto"}} className="text-center"></div> */}
-        {/* <button className="btn btn-primary">
-          hi</button> */}
-        
-      </div>
+        <div className="container border-0 mt-5">
+          <div className="row">
+            <div className="col-md-7 d-md-block d-none">
+              <img src={login_image} alt={"not found"} className="w-100"></img>
+            </div>
+            <div className="col-md-5 ">
+              <div className="container bg-light border-light rounded h-100">
+                <div className="row text-center pt-5 text-secondary"><h1>WELCOME</h1></div>
+                <div className="row text-center"><p>Login to your <em>gmail account</em> here</p></div>
+                <div id="signInDiv" className="btn d-flex justify-content-center align-items-center" type="button"> </div>
+              </div>
+            </div>
+          </div>
+        </div>
       {
         user &&
         <div>
