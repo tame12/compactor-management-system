@@ -1,8 +1,11 @@
 // app.js
-
 const express = require('express');
+const path = require("path")
+const dotenv = require('dotenv').config();
 const connectDB = require('./config/db');
-var cors = require('cors');
+const cors = require('cors');
+const port = process.env.PORT || 8082;
+
 
 // routes
 const equipment = require('./routes/api/equipment');
@@ -23,6 +26,5 @@ app.get('/', (req, res) => res.send('Hello world!'));
 // use Routes
 app.use('/api/equipment', equipment);
 
-const port = process.env.PORT || 8082;
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
