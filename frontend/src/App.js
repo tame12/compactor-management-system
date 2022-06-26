@@ -1,4 +1,3 @@
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 // Components
@@ -58,7 +57,7 @@ function App() {
         </div>
       } */}
       <Router>
-        <NavbarComponent></NavbarComponent>
+        <NavbarComponent/>
         <Routes>
           <Route exact path="/" element={<Dashboard/>}/>
           <Route exact path="/stock-out" element={<StockOut/>}/>
