@@ -28,7 +28,8 @@ This project aims to solve a problem that SGH-Physiotherapy department is curren
 1. Recharts [docs](https://recharts.org/en-US/guide)
 
 ## Backend
-1. add in ....
+1. Nodemon [docs](https://www.npmjs.com/package/nodemon
+
 
 # Getting Started with Create React App
 
