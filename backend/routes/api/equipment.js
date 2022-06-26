@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+
 // Load Equipment model
 // const Equipment = require('../../models/equipment.js');
 const Equipment = require('../../models/equipment');
@@ -28,6 +29,8 @@ router.get('/:id', (req, res) => {
 // @route POST api/equipment
 // @description add/save equipment
 router.post('/', (req, res) => {
+  // !! Working Here !! //
+  console.log(req.body);
   Equipment.create(req.body)
     .then(equipment => res.json({ msg: 'equipment added successfully' }))
     .catch(err => res.status(400).json({ error: 'Unable to add this equipment' }));
