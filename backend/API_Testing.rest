@@ -1,0 +1,5 @@
+// This file is used to test the API Endpoints
+GET http://localhost:8082/api/equipment
+
+###
+GET http://localhost:

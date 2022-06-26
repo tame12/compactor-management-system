@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Load Equipment model
 // const Equipment = require('../../models/equipment.js');
-const Equipment = require('../../models/equipment');
+const Equipment = require('../../models/compactor');
 
 // @route GET api/equipment/test
 // @description tests equipment route
