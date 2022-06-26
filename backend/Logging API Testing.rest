@@ -1,0 +1,26 @@
+### GET ALL Testing [Logging API]
+GET http://localhost:8082/api/logging
+
+### GET ONE Testing [Logging API]
+GET http://localhost:8082/api/logging/<objectID>
+
+### POST Testing [Logging API]
+POST http://localhost:8082/logging
+Content-Type: application/json
+
+{
+    "key": "keyvalue",
+    "key2": "keyvalue2"
+}
+
+### UPDATE Testing [Logging API]
+PATCH http://localhost:8082/logging/<objectID>
+Content-Type: application/json
+
+{
+    "key": "keyvalue",
+    "key2": "keyvalue2"
+}
+
+### DELETE Testing [Logging API]
+DELETE http://localhost:8082/logging/<objectID>

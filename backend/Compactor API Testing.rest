@@ -1,0 +1,29 @@
+// This file is used to test the API Endpoints
+
+### GET ALL Testing [Compactor API]
+GET http://localhost:8082/api/compactor
+
+### GET ONE Testing [Compactor API]
+GET http://localhost:8082/api/compactor/<objectID>
+
+### POST Testing [Compactor API]
+POST http://localhost:8082/compactor
+Content-Type: application/json
+
+{
+    "key": "keyvalue",
+    "key2": "keyvalue2"
+}
+
+### UPDATE Testing [Compactor API]
+PATCH http://localhost:8082/compactor/<objectID>
+Content-Type: application/json
+
+{
+    "key": "keyvalue",
+    "key2": "keyvalue2"
+}
+
+### DELETE Testing [Compactor API]
+DELETE http://localhost:8082/compactor/<objectID>
+
