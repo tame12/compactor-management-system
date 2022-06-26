@@ -11,6 +11,7 @@ This project aims to solve a problem that SGH-Physiotherapy department is curren
 
 
 # How to Start App on Local Machine
+0. Put a copy of the .env file in the root directory
 1. Open new Terminal and run `npm install`.
 2. In the same terminal run `npm run serve` this will setup API connection with MongoDB. 
 3. Create a new terminal and cd into the frontend folder.
@@ -22,7 +23,8 @@ This project aims to solve a problem that SGH-Physiotherapy department is curren
 ## Frontend (General)
 1. react-router-dom [docs](https://v5.reactrouter.com/web/guides/quick-start)
 2. react-boostrap [docs](https://react-bootstrap.github.io/components/navbar/)
-3. react-router-boostrap [docs](https://github.com/react-bootstrap/react-router-bootstrap)
+3. react-router-bootstrap [docs](https://github.com/react-bootstrap/react-router-bootstrap)
+4. material-ui [docs](https://mui.com/material-ui/getting-started/overview/)
 
 ### Dashboard Page 
 1. Recharts [docs](https://recharts.org/en-US/guide)
