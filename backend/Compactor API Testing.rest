@@ -1,5 +1,8 @@
 // This file is used to test the API Endpoints
 
+### Test Route to ensure API can actually connect
+GET http://localhost:8082/api/compactor/test
+
 ### GET ALL Testing [Compactor API]
 GET http://localhost:8082/api/compactor
 

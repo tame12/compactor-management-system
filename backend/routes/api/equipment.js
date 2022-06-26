@@ -2,56 +2,55 @@ const express = require('express');
 const router = express.Router();
 
 
-// Load Equipment model
-// const Equipment = require('../../models/equipment.js');
-const Equipment = require('../../models/compactor');
+// Load compactor model
+const Compactor = require('../../models/compactor');
 
-// @route GET api/equipment/test
-// @description tests equipment route
-router.get('/test', (req, res) => res.send('equipment route testing!'));
+// @route GET api/compactor/test
+// @description tests compactor route
+router.get('/test', (req, res) => res.send('compactor route testing successful'));
 
-// @route GET api/equipment
-// @description Get all equipment
+// @route GET api/compactor
+// @description Get all compactor
 router.get('/', (req, res) => {
-  Equipment.find()
-    .then(equipment => res.json(equipment))
-    .catch(err => res.status(404).json({ noequipmentfound: 'No equipment found' }));
+  Compactor.find()
+    .then(compactor => res.json(compactor))
+    .catch(err => res.status(404).json({ nocompactorfound: 'No compactor found' }));
 });
 
-// @route GET api/equipment/:id
-// @description Get single equipment by id
+// @route GET api/compactor/:id
+// @description Get single compactor by id
 router.get('/:id', (req, res) => {
-  Equipment.findById(req.params.id)
-    .then(equipment => res.json(equipment))
-    .catch(err => res.status(404).json({ noequipmentfound: 'No equipment found' }));
+  Compactor.findById(req.params.id)
+    .then(compactor => res.json(compactor))
+    .catch(err => res.status(404).json({ nocompactorfound: 'No compactor found' }));
 });
 
-// @route POST api/equipment
-// @description add/save equipment
+// @route POST api/compactor
+// @description add/save compactor
 router.post('/', (req, res) => {
   // !! Working Here !! //
   console.log(req.body);
-  Equipment.create(req.body)
-    .then(equipment => res.json({ msg: 'equipment added successfully' }))
-    .catch(err => res.status(400).json({ error: 'Unable to add this equipment' }));
+  Compactor.create(req.body)
+    .then(compactor => res.json({ msg: 'compactor added successfully' }))
+    .catch(err => res.status(400).json({ error: 'Unable to add this compactor' }));
 });
 
-// @route POST api/equipment/:id
-// @description Update equipment
+// @route POST api/compactor/:id
+// @description Update compactor
 router.put('/:id', (req, res) => {
-  Equipment.findByIdAndUpdate(req.params.id, req.body)
-    .then(equipment => res.json({ msg: 'Updated successfully' }))
+  Compactor.findByIdAndUpdate(req.params.id, req.body)
+    .then(compactor => res.json({ msg: 'Updated successfully' }))
     .catch(err =>
       res.status(400).json({ error: 'Unable to update the Database' })
     );
 });
 
-// @route POST api/equipment/:id
-// @description Delete equipment by id
+// @route POST api/compactor/:id
+// @description Delete compactor by id
 router.delete('/:id', (req, res) => {
-  Equipment.findByIdAndRemove(req.params.id, req.body)
-    .then(equipment => res.json({ mgs: 'equipment entry deleted successfully' }))
-    .catch(err => res.status(404).json({ error: 'No such a equipment' }));
+  Compactor.findByIdAndRemove(req.params.id, req.body)
+    .then(compactor => res.json({ mgs: 'compactor entry deleted successfully' }))
+    .catch(err => res.status(404).json({ error: 'No such a compactor' }));
 });
 
 module.exports = router;
