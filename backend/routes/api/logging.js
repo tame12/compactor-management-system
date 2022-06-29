@@ -1,24 +1,24 @@
 const express = require("express");
 const router = express.Router();
 
-// Load compactor model
-const Compactor = require("../../models/compactor");
+// Load Logging model
+const Logging = require("../../models/logging")
 
 // @description tests compactor route
 // @route GET api/compactor/test
 // Works!
 router.get("/test", (req, res) =>
-	res.send("logger route testing successful")
+	res.send("compactor route testing successful")
 );
 
 // @description Get all compactor
 // @route GET api/compactor
 // Works!
 router.get("/", (req, res) => {
-	Compactor.find()
-		.then((compactor) => res.json(compactor))
+	Logging.find()
+		.then((logs) => res.json(logs))
 		.catch((err) =>
-			res.status(404).json({ nocompactorfound: "No compactor found" })
+			res.status(404).json({ logs: "No logs found" })
 		);
 });
 
@@ -26,10 +26,10 @@ router.get("/", (req, res) => {
 // @route GET api/compactor/:id
 // Works!
 router.get("/:id", (req, res) => {
-	Compactor.findById(req.params.id)
-		.then((compactor) => res.json(compactor))
+	Logging.findById(req.params.id)
+		.then((logs) => res.json(logs))
 		.catch((err) =>
-			res.status(404).json({ nocompactorfound: "No compactor found" })
+			res.status(404).json({ nologsfound: "No compactor found" })
 		);
 });
 

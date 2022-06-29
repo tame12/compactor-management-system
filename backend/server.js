@@ -11,6 +11,8 @@ const port = process.env.PORT || 8082;
 console.log(`Your port is${process.env.MONGO_URI}`);
 // routes
 const compactor = require('./routes/api/compactor');
+const logging = require('./routes/api/logging')
+
 
 const app = express();
 
@@ -29,6 +31,7 @@ app.use(express.json({ extended: false }));
 app.get('/', (req, res) => res.sendFile(__dirname + '/page.html'));
 console.log(__dirname);
 // use Routes
+app.use('/api/logging',logging)
 app.use('/api/compactor', compactor);
 
 
