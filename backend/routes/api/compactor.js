@@ -75,7 +75,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-// @description Update compactor
+// @description Update compactor Basic
 // @route POST api/compactor/:id
 router.put("/:id", (req, res) => {
 	Compactor.findByIdAndUpdate(req.params.id, req.body)
@@ -84,6 +84,22 @@ router.put("/:id", (req, res) => {
 			res.status(400).json({ error: "Unable to update the Database" })
 		);
 });
+
+// Finding Compactor ID Middleware for Update and Delete Routes
+async function getCompactor(req, res, next) {
+  let compactor
+  try {
+    compactor = await Compactor.findById(req.params.id)
+    if (subscriber == null) {
+      return res.status(404).json({ message: 'Cannot find compactor' })
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message })
+  }
+
+  res.compactor = compactor
+  next()
+}
 
 // @description Delete compactor by id
 // @route POST api/compactor/:id
