@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const CompactorSchema = new mongoose.Schema({
   username: {
@@ -21,8 +21,7 @@ const CompactorSchema = new mongoose.Schema({
   }
 });
 
-module.exports = Compactor = mongoose.model('compactor', CompactorSchema);
-
+module.exports = Compactor = mongoose.model("compactor", CompactorSchema);
 
 /* this is how the our one should look like
 {
