@@ -1,26 +1,49 @@
-### GET ALL Testing [Logging API]
+### Route Endpoint Test !Works!
+GET http://localhost:8082/api/logging/test
+
+### GET ALL Testing [Logging API] !Works!
 GET http://localhost:8082/api/logging
 
-### GET ONE Testing [Logging API]
-GET http://localhost:8082/api/logging/<objectID>
+### GET ONE Testing [Logging API] !Works!
+GET http://localhost:8082/api/logging/62bc162557b8fe2ddc833cde
 
-### POST Testing [Logging API]
-POST http://localhost:8082/logging
+### POST Testing [Logging API] !Works!
+# This is the most important route for Logging
+POST http://localhost:8082/api/logging
 Content-Type: application/json
 
 {
-    "key": "keyvalue",
-    "key2": "keyvalue2"
+    "username": "Wisely",
+    "compactorID": "A",
+    "changeditems": {
+        "item1": 1,
+        "item2": 1,
+        "item3": 1,
+        "item4": 1,
+        "item5": 1,
+        "item6": 1
+    }
 }
 
-### UPDATE Testing [Logging API]
-PATCH http://localhost:8082/logging/<objectID>
+
+### DELETE Testing [Logging API] !Works!
+DELETE http://localhost:8082/api/logging/62bc1937343e11eb5960b096
+
+
+# ### UPDATE Testing [Logging API] 
+// Does not work. Update route unnecessary for logs?
+PATCH http://localhost:8082/api/logging/62bc15b157b8fe2ddc833cdb
 Content-Type: application/json
 
 {
-    "key": "keyvalue",
-    "key2": "keyvalue2"
+    "username": "Tim",
+    "compactorID": "A",
+    "changeditems": {
+        "item1": 2,
+        "item2": 2,
+        "item3": 2,
+        "item4": 2,
+        "item5": 2,
+        "item6": 2
+    }
 }
-
-### DELETE Testing [Logging API]
-DELETE http://localhost:8082/logging/<objectID>

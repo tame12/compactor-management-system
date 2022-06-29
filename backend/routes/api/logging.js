@@ -4,15 +4,15 @@ const router = express.Router();
 // Load Logging model
 const Logging = require("../../models/logging")
 
-// @description tests compactor route
-// @route GET api/compactor/test
+// @description tests logging route
+// @route GET api/logging/test
 // Works!
 router.get("/test", (req, res) =>
-	res.send("compactor route testing successful")
+	res.send("logging route testing successful")
 );
 
-// @description Get all compactor
-// @route GET api/compactor
+// @description Get all logging
+// @route GET api/logging
 // Works!
 router.get("/", (req, res) => {
 	Logging.find()
@@ -22,23 +22,23 @@ router.get("/", (req, res) => {
 		);
 });
 
-// @description Get single compactor by id
-// @route GET api/compactor/:id
+// @description Get single logging by id
+// @route GET api/logging/:id
 // Works!
 router.get("/:id", (req, res) => {
 	Logging.findById(req.params.id)
 		.then((logs) => res.json(logs))
 		.catch((err) =>
-			res.status(404).json({ nologsfound: "No compactor found" })
+			res.status(404).json({ nologsfound: "No logs found" })
 		);
 });
 
-// @description add/save compactor
-// @route POST api/compactor/post
+// @description add/save logging
+// @route POST api/logging/post
 // router.post("/", (req, res) => {
 // 	// !! Working Here !! //
 
-// 	// let newCom = new Compactor({
+// 	// let newCom = new logging({
 // 	//   username: req.body.username,
 // 	//   date: req.body.date,
 // 	//   items: req.body.items,
@@ -47,52 +47,56 @@ router.get("/:id", (req, res) => {
 // 	// res.redirect('/')
 // 	// // console.log(req.body)
 
-// 	Compactor.create({
-// 		compactorID: req.body.compactorID,
+// 	logging.create({
+// 		loggingID: req.body.loggingID,
 // 		date: req.body.date,
 // 		items: req.body.items,
 // 	})
-// 		.then((compactor) => res.json({ msg: "compactor added successfully" }))
+// 		.then((logging) => res.json({ msg: "logging added successfully" }))
 // 		.catch((err) =>
-// 			res.status(400).json({ error: "Unable to add this compactor" })
+// 			res.status(400).json({ error: "Unable to add this logging" })
 // 		);
 // });
 
 
-// @description add/save compactor 
-// @route POST api/compactor
+// @description add/save logging 
+// @route POST api/logging
 // !!WORKS!!//
 router.post('/', async (req, res) => {
-  const compactor = new Compactor({
-    compactorID: req.body.compactorID,
-    items: req.body.items
+  const logging = new Logging({
+    loggingID: req.body.loggingID,
+	username: req.body.username,
+	compactorID: req.body.compactorID,
+    changeditems: req.body.changeditems
   })
   try {
-    const newCompactor = await compactor.save()
-    res.status(201).json(newCompactor)
+    const newLogging = await logging.save()
+    res.status(201).json(newLogging)
   } catch (err) {
     res.status(400).json({ message: err.message })
   }
 })
 
-// @description Update compactor
-// @route POST api/compactor/:id
-router.put("/:id", (req, res) => {
-	Compactor.findByIdAndUpdate(req.params.id, req.body)
-		.then((compactor) => res.json({ msg: "Updated successfully" }))
-		.catch((err) =>
-			res.status(400).json({ error: "Unable to update the Database" })
-		);
+
+// @description Delete logging by id
+// @route POST api/logging/:id
+router.delete("/:id", (req, res) => {
+	Logging.findByIdAndRemove(req.params.id, req.body)
+	.then((logging) =>
+	res.json({ mgs: "logging entry deleted successfully" })
+	)
+	.catch((err) => res.status(404).json({ error: "No such log" }));
 });
 
-// @description Delete compactor by id
-// @route POST api/compactor/:id
-router.delete("/:id", (req, res) => {
-	Compactor.findByIdAndRemove(req.params.id, req.body)
-		.then((compactor) =>
-			res.json({ mgs: "compactor entry deleted successfully" })
-		)
-		.catch((err) => res.status(404).json({ error: "No such a compactor" }));
-});
+// // @description Update logging
+// // @route POST api/logging/:id
+// // NOTE: Currently does not work:  UPDATE Unnecessary for logs?
+// router.put("/:id", (req, res) => {
+// 	Logging.findByIdAndUpdate(req.params.id, req.body)
+// 		.then((logging) => res.json({ msg: "Updated successfully" }))
+// 		.catch((err) =>
+// 			res.status(400).json({ error: "Unable to update the Database" })
+// 		);
+// });
 
 module.exports = router;
