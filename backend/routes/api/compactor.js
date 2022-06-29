@@ -75,16 +75,6 @@ router.post('/', async (req, res) => {
   }
 })
 
-// @description Update compactor Basic
-// @route POST api/compactor/:id
-router.put("/:id", (req, res) => {
-	Compactor.findByIdAndUpdate(req.params.id, req.body)
-		.then((compactor) => res.json({ msg: "Updated successfully" }))
-		.catch((err) =>
-			res.status(400).json({ error: "Unable to update the Database" })
-		);
-});
-
 // Finding Compactor ID Middleware for Update and Delete Routes
 async function getCompactor(req, res, next) {
   let compactor
@@ -101,7 +91,7 @@ async function getCompactor(req, res, next) {
   next()
 }
 
-// @description Update compactor Proper
+// @description Update compactor
 // @route POST api/compactor/:id
 router.patch('/:id', getCompactor, async (req, res) => {
   if (req.body.compactorID != null) {
@@ -120,12 +110,15 @@ router.patch('/:id', getCompactor, async (req, res) => {
 
 // @description Delete compactor by id
 // @route POST api/compactor/:id
-router.delete("/:id", (req, res) => {
-	Compactor.findByIdAndRemove(req.params.id, req.body)
-		.then((compactor) =>
-			res.json({ mgs: "compactor entry deleted successfully" })
-		)
-		.catch((err) => res.status(404).json({ error: "No such a compactor" }));
-});
+
+router.delete("/:id", getCompactor, async (req, res) => {
+  try {
+    await res.compactor.remove()
+    res.json({ message: "Compactor Deleted Successfully" })
+
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+})
 
 module.exports = router;

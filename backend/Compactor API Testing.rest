@@ -42,5 +42,5 @@ Content-Type: application/json
 }
 
 ### DELETE Testing [Compactor API]
-DELETE http://localhost:8082/compactor/<objectID>
+DELETE http://localhost:8082/api/compactor/62bc0d300d28f04bf82f2135
 
