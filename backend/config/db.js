@@ -1,19 +1,16 @@
 const db = process.env.MONGO_URI;
 // console.log(process.env.MONGO_URI) //prints the mongoURI key
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const connectDB = async () => {
-  try {
-    await mongoose.connect(
-      db,
-      { useNewUrlParser: true }
-    );
+	try {
+		await mongoose.connect(db, { useNewUrlParser: true });
 
-    console.log('MongoDB is Connected...');
-  } catch (err) {
-    console.error(err.message);
-    process.exit(1);
-  }
+		console.log("MongoDB is Connected...");
+	} catch (err) {
+		console.error(err.message);
+		process.exit(1);
+	}
 };
 
 module.exports = connectDB;
