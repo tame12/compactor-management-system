@@ -10,12 +10,19 @@ GET http://localhost:8082/api/compactor
 GET http://localhost:8082/api/compactor/62b978d9ecb4501a2faf51e6
 
 ### POST Testing [Compactor API]
-POST http://localhost:8082/compactor
+POST http://localhost:8082/api/compactor
 Content-Type: application/json
 
 {
-    "key": "keyvalue",
-    "key2": "keyvalue2"
+    "username": "Tim3",
+    "items": {
+        "item1": 1,
+        "item2": 2,
+        "item3": 3,
+        "item4": 4,
+        "item5": 5,
+        "item6": 6
+    }
 }
 
 ### UPDATE Testing [Compactor API]
