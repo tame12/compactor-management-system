@@ -26,12 +26,19 @@ Content-Type: application/json
 }
 
 ### UPDATE Testing [Compactor API]
-PATCH http://localhost:8082/compactor/<objectID>
+PATCH http://localhost:8082/api/compactor/62bbd9268364a01f858ec0a6
 Content-Type: application/json
 
 {
-    "key": "keyvalue",
-    "key2": "keyvalue2"
+    "compactorID": "Updated Tim",
+    "items": {
+        "item1": 6,
+        "item2": 6,
+        "item3": 6,
+        "item4": 6,
+        "item5": 6,
+        "item6": 6
+    }
 }
 
 ### DELETE Testing [Compactor API]

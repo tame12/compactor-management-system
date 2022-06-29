@@ -90,7 +90,7 @@ async function getCompactor(req, res, next) {
   let compactor
   try {
     compactor = await Compactor.findById(req.params.id)
-    if (subscriber == null) {
+    if (compactor == null) {
       return res.status(404).json({ message: 'Cannot find compactor' })
     }
   } catch (err) {
@@ -100,6 +100,23 @@ async function getCompactor(req, res, next) {
   res.compactor = compactor
   next()
 }
+
+// @description Update compactor Proper
+// @route POST api/compactor/:id
+router.patch('/:id', getCompactor, async (req, res) => {
+  if (req.body.compactorID != null) {
+    res.compactor.compactorID = req.body.compactorID
+  }
+  if (req.body.items != null) {
+    res.compactor.items = req.body.items
+  }
+  try {
+    const updatedCompactor = await res.compactor.save()
+    res.json(updatedCompactor)
+  } catch (err) {
+    res.status(400).json({ message: err.message})
+  }
+})
 
 // @description Delete compactor by id
 // @route POST api/compactor/:id
