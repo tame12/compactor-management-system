@@ -7,7 +7,7 @@ GET http://localhost:8082/api/compactor/test
 GET http://localhost:8082/api/compactor
 
 ### GET ONE Testing [Compactor API]
-GET http://localhost:8082/api/compactor/<objectID>
+GET http://localhost:8082/api/compactor/62b978d9ecb4501a2faf51e6
 
 ### POST Testing [Compactor API]
 POST http://localhost:8082/compactor

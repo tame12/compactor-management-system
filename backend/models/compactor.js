@@ -5,12 +5,19 @@ const CompactorSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  date: {
-    type: Date
+  createdAt: { // this field is immutable so that the created date doesn't change
+    type: Date,
+    default: () => Date.now(),
+    immutable: true,
   },
+  updatedAt: Date,
   items: {
-    type: Map,
-    of: Number
+    item1: Number,
+    item2: Number,
+    item3: Number,
+    item4: Number,
+    item5: Number,
+    item6: Number,
   }
 });
 
