@@ -7,14 +7,14 @@ GET http://localhost:8082/api/compactor/test
 GET http://localhost:8082/api/compactor
 
 ### GET ONE Testing [Compactor API]
-GET http://localhost:8082/api/compactor/62b978d9ecb4501a2faf51e6
+GET http://localhost:8082/api/compactor/62bbd9268364a01f858ec0a6
 
 ### POST Testing [Compactor API]
 POST http://localhost:8082/api/compactor
 Content-Type: application/json
 
 {
-    "username": "Tim3",
+    "compactorID": "Tim3",
     "items": {
         "item1": 1,
         "item2": 2,

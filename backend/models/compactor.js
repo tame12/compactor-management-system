@@ -1,16 +1,14 @@
 const mongoose = require("mongoose");
 
 const CompactorSchema = new mongoose.Schema({
-  username: {
+  compactorID: {
     type: String,
     required: true
   },
-  createdAt: { // this field is immutable so that the created date doesn't change
+  updatedAt: { // this field is mutable such that date is always updated
     type: Date,
     default: () => Date.now(),
-    immutable: true,
   },
-  updatedAt: Date,
   items: {
     item1: Number,
     item2: Number,
