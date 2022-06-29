@@ -9,7 +9,11 @@ const LoggingSchema = new mongoose.Schema({
     type: Date,
     default: () => Date.now(),
     immutable: true,
-    },
+  },
+  compactorID: {
+    type: String,
+    required: true
+  },
   // Technically there is no need to include all the items as parameters when logging, mongodb allows you to be flexible. 
   changeditems: {
     item1: Number,
