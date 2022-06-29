@@ -7,6 +7,7 @@ const Compactor = require("../../models/compactor");
 // @route GET api/compactor/test
 // @description tests compactor route
 router.get("/test", (req, res) =>
+// something needs to be added here to go to logging. Need to get a logging.js file to send to logging within the same file. 
 	res.send("compactor route testing successful")
 );
 
