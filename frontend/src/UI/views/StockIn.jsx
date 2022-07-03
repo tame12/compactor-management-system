@@ -2,9 +2,41 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import ItemComponent from '../../components/ItemComponent';
+import ItemList from '../../components/ItemList';
+import { useState } from 'react';
+import AddItem from '../../components/AddItem';
+
 
 const StockIn = () => {
+  const [items, setItems] = useState([
+    { 
+      id: 1,
+      itemName: "crutches",
+      itemQuantity: 5
+    },
+    {
+      id: 2,
+      itemName: "walking frame",
+      itemQuantity: 3
+    },
+    {
+      id: 3,
+      itemName: "walking stick",
+      itemQuantity: 3
+    }
+  ])
+
+  const addItem = (item) => {
+    const id = Math.floor(Math.random() * 10000) + 1
+    const newItem = {id, ...item}
+
+    setItems([...items, newItem])
+  }
+
+  const removeItem = (itemName) => {
+    setItems(items.filter((item) => item.itemName !== itemName))
+  } 
+
   return (
     <Row>
       <Col></Col>
@@ -28,16 +60,17 @@ const StockIn = () => {
             <Form.Label>Compactor Number</Form.Label>
             <Form.Control type="number" placeholder="Enter Compactor Number" />
           </Form.Group>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
 
-          {/* Input item name and quantity */}
-          <Form.Group className="mb-3" controlId="forItemInput">
-            <Form.Label>Item Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter Item Name" />
-            <Form.Label>Item Quantity</Form.Label>
-            <Form.Control type="number" placeholder="Enter Quantity" />
-          </Form.Group>
-          
-          <h3>List of items</h3>
+          <hr />
+
+          <AddItem onAddItem={addItem}/>
+
+          <hr/>
+
           {/* to be rendered from state  */}
           
           {/* props for each item:
@@ -45,13 +78,12 @@ const StockIn = () => {
             image source
             quantity
           */}
-          <ItemComponent/>
-          <ItemComponent/>
           
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
+          
+          <ItemList items={items} onRemoveItem={removeItem} />
+          
+          
+          <br />
       </Col>
       <Col></Col>
     </Row>
