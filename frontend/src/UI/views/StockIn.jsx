@@ -22,7 +22,7 @@ const StockIn = () => {
     {
       id: 3,
       itemName: "walking stick",
-      itemQuantity: 3
+      itemQuantity: 4
     }
   ])
 
