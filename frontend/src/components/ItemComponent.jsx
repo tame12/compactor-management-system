@@ -17,9 +17,6 @@ const ItemComponent = ({ item, onRemoveItem }) => {
                             <Col>
                                 <Button variant="danger" onClick={() => onRemoveItem(item.itemName)}>Remove</Button>
                             </Col>
-                            <Col>
-                                <Button variant="warning">Edit</Button>
-                            </Col>
                         </Row>
                     </Col>
                     <Col className="col-4"> 
