@@ -74,7 +74,9 @@ const StockIn = () => {
   }
   return (
     <Row>
-      <Col></Col>
+      <Col style={{marginLeft: 30}}>
+        <h1>Stock-In Page</h1>
+      </Col>
       <Col>
         <Form onSubmit={onSubmit}>
           {/* Email */}
