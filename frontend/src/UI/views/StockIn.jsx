@@ -8,6 +8,9 @@ import AddItem from '../../components/AddItem';
 
 
 const StockIn = () => {
+  const [userName, setUserName] = useState("")
+  const [email, setEmail] = useState("")
+  const [compactor, setCompactor] = useState(1)
   const [items, setItems] = useState([
     { 
       id: 1,
@@ -36,29 +39,76 @@ const StockIn = () => {
   const removeItem = (itemName) => {
     setItems(items.filter((item) => item.itemName !== itemName))
   } 
-
+  
+  const onSubmit = (e) => {
+    e.preventDefault()
+    // check for name, email, compactor number and items to be added
+    try {
+      if(userName.length === 0){
+        throw new Error("username is empty");
+      }
+      else if(email.length === 0){
+        throw new Error("email is empty");
+      }
+      else if(items.length === 0){
+        throw new Error("No Items to add");
+      }
+      else if(compactor > 2 || compactor < 1){
+        throw new Error("Compactor does not exist");
+      }
+      else{
+        alert("ok")
+        let toSubmit = {
+          "userName": userName,
+          "email": email,
+          "compactor": compactor,
+          "items": items
+        }
+        console.log(toSubmit)
+      }
+    }
+    catch(error){
+      alert(error);
+    }
+    
+  }
   return (
     <Row>
       <Col></Col>
       <Col>
-        <Form>
+        <Form onSubmit={onSubmit}>
           {/* Email */}
           <Form.Group className="mb-3 mx-auto" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control 
+            type="email" 
+            placeholder="Enter email" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)
+            }/>
           </Form.Group>
 
           {/* Name */}
           <Form.Group className="mb-3" controlId="forName">
             <Form.Label>Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter name" />
+            <Form.Control 
+            type="text" 
+            placeholder="Enter name" 
+            value={userName} 
+            onChange={(e) => setUserName(e.target.value)}
+            />
           </Form.Group>
 
           {/* Compactor Number */}
           {/* TBC - Need to add limit to the number 1-2  */}
           <Form.Group className="mb-3" controlId="forCompactor">
             <Form.Label>Compactor Number</Form.Label>
-            <Form.Control type="number" placeholder="Enter Compactor Number" />
+            <Form.Control 
+            type="number" 
+            placeholder="Enter Compactor Number" 
+            value={compactor}
+            onChange={(e) => setCompactor(e.target.value)}
+          />
           </Form.Group>
           <Button variant="primary" type="submit">
             Submit
@@ -66,23 +116,11 @@ const StockIn = () => {
         </Form>
 
           <hr />
-
+          {/* Add New Item  */}
           <AddItem onAddItem={addItem}/>
-
           <hr/>
-
-          {/* to be rendered from state  */}
-          
-          {/* props for each item:
-            name
-            image source
-            quantity
-          */}
-          
-          
+          {/* Item List */}
           <ItemList items={items} onRemoveItem={removeItem} />
-          
-          
           <br />
       </Col>
       <Col></Col>
