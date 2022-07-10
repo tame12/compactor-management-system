@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
+const Item = require("./item.js")
 
 const LoggingSchema = new mongoose.Schema({
   username: {
+    type: String,
+    required: true
+  },
+  email: {
     type: String,
     required: true
   },
@@ -15,14 +20,17 @@ const LoggingSchema = new mongoose.Schema({
     required: true
   },
   // Technically there is no need to include all the items as parameters when logging, mongodb allows you to be flexible. 
-  changeditems: {
-    item1: Number,
-    item2: Number,
-    item3: Number,
-    item4: Number,
-    item5: Number,
-    item6: Number,
-  }
+  // changeditems: {
+  //   item1: Number,
+  //   item2: Number,
+  //   item3: Number,
+  //   item4: Number,
+  //   item5: Number,
+  //   item6: Number,
+  // }
+  changedItems: [
+    Item
+  ]
 });
 
 module.exports = Logging = mongoose.model('logging', LoggingSchema);

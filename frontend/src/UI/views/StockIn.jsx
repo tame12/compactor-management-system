@@ -8,22 +8,19 @@ import AddItem from '../../components/AddItem';
 
 
 const StockIn = () => {
-  const [userName, setUserName] = useState("")
-  const [email, setEmail] = useState("")
+  const [userName, setUserName] = useState("mock-username")
+  const [email, setEmail] = useState("mock@email")
   const [compactor, setCompactor] = useState(1)
   const [items, setItems] = useState([
     { 
-      id: 1,
       itemName: "crutches",
       itemQuantity: 5
     },
     {
-      id: 2,
       itemName: "walking frame",
       itemQuantity: 3
     },
     {
-      id: 3,
       itemName: "walking stick",
       itemQuantity: 4
     }
@@ -39,8 +36,36 @@ const StockIn = () => {
   const removeItem = (itemName) => {
     setItems(items.filter((item) => item.itemName !== itemName))
   } 
+
+  const sendToCompactor = async (payload) => {
+    // extract items and which compactor they are being stocked in for 
+    // assume that new items could have been added
+    // await API call 
+    
+    return 'successfully sent to compactor';
+  }
+
+  const sendToLogs = async (payload) => {
+    const url = "http://localhost:8082/api/logging"
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      alert(response.status)
+      return response.json();
+    }
+    catch(err) {
+      console.log("FE " + err)
+    }
+  }
   
   const onSubmit = (e) => {
+    alert("sent!")
     e.preventDefault()
     // check for name, email, compactor number and items to be added
     try {
@@ -57,15 +82,18 @@ const StockIn = () => {
         throw new Error("Compactor does not exist");
       }
       else{
-        alert("ok")
-        let toSubmit = {
+        // call sendToCompactor
+        // call sendToLogs
+        // once both operations are successful, can redirect to confirmation page,.
+
+        const logsPayload = {
           "username": userName,
           "email": email,
-          "date": Date(),
-          "compactor": compactor,
-          "items": items
+          "compactorID": compactor,
+          "changedItems": items
         }
-        console.log(toSubmit)
+        const logStatus = sendToLogs(logsPayload)
+
       }
     }
     catch(error){

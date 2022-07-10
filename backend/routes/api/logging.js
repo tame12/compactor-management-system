@@ -62,19 +62,22 @@ router.get("/:id", (req, res) => {
 // @description add/save logging 
 // @route POST api/logging
 // !!WORKS!!//
-router.post('/', async (req, res) => {
-  const logging = new Logging({
-    loggingID: req.body.loggingID,
-	username: req.body.username,
-	compactorID: req.body.compactorID,
-    changeditems: req.body.changeditems
-  })
-  try {
-    const newLogging = await logging.save()
-    res.status(201).json(newLogging)
-  } catch (err) {
-    res.status(400).json({ message: err.message })
-  }
+router.post('/', (req, res) => {
+	// const logging = new Logging({
+	// 	// loggingID: req.body.loggingID,
+	// 	username: req.body.username,
+	// 	email: req.body.email,
+	// 	compactorID: req.body.compactorID,
+	// 	changedTtems: req.body.changeditems
+	// })
+	const logging = new Logging(req.body)
+	console.log(logging)
+	try {
+		const newLogging = logging.save()
+		res.status(201).send("Successfully Added Log: " + newLogging)
+	} catch (err) {
+		console.log("Backend problem " + err);
+	}
 })
 
 
