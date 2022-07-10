@@ -5,13 +5,23 @@ const EquipmentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  email: {
+    type: String,
+    required: true
+  },
   date: {
     type: Date
   },
-  items: {
-    type: Map,
-    of: Number
-  }
+  compactor: {
+    type: Number
+  },
+  items: [
+    {
+      id: Number,
+      itemName: String,
+      itemQuantity: Number
+    }
+  ]
 });
 
 module.exports = Equipment = mongoose.model('equipment', EquipmentSchema);

@@ -27,13 +27,13 @@ router.get('/:id', (req, res) => {
 
 // @route POST api/equipment
 // @description add/save equipment
-router.post('/', (req, res) => {
-  Equipment.create(req.body)
-    .then(equipment => res.json({ msg: 'equipment added successfully' }))
-    .catch(err => res.status(400).json({ error: 'Unable to add this equipment' }));
+router.post('/', async (req, res) => {
+  await Equipment.create(req.body)
+    .then(equipment => console.log(equipment))
+    .catch(err => res.status(400).send(err));
 });
 
-// @route POST api/equipment/:id
+// @route PUT api/equipment/:id
 // @description Update equipment
 router.put('/:id', (req, res) => {
   Equipment.findByIdAndUpdate(req.params.id, req.body)
@@ -43,7 +43,7 @@ router.put('/:id', (req, res) => {
     );
 });
 
-// @route POST api/equipment/:id
+// @route DELETE api/equipment/:id
 // @description Delete equipment by id
 router.delete('/:id', (req, res) => {
   Equipment.findByIdAndRemove(req.params.id, req.body)
