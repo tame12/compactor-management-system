@@ -74,7 +74,8 @@ router.post('/', (req, res) => {
 	console.log(logging)
 	try {
 		const newLogging = logging.save()
-		res.status(201).send("Successfully Added Log: " + newLogging)
+		console.log("Successfully Added Log: " + newLogging)
+		res.status(201)
 	} catch (err) {
 		console.log("Backend problem " + err);
 	}
