@@ -59,8 +59,9 @@ const StockIn = () => {
       else{
         alert("ok")
         let toSubmit = {
-          "userName": userName,
+          "username": userName,
           "email": email,
+          "date": Date(),
           "compactor": compactor,
           "items": items
         }
