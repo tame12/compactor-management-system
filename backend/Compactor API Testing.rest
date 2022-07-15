@@ -1,4 +1,6 @@
 // This file is used to test the API Endpoints
+// Download VSCode Extension "REST Client by Huachao Mao"
+// Copy .env file into the Root Folder with Mongo_URI from Paul/Shaan
 
 ### Test Route to ensure API can actually connect
 GET http://localhost:8082/api/compactor/test
@@ -7,26 +9,44 @@ GET http://localhost:8082/api/compactor/test
 GET http://localhost:8082/api/compactor
 
 ### GET ONE Testing [Compactor API]
-GET http://localhost:8082/api/compactor/62bbd9268364a01f858ec0a6
+GET http://localhost:8082/api/compactor/62bc36416d71fcb0f4511b14
 
 ### POST Testing [Compactor API]
 POST http://localhost:8082/api/compactor
 Content-Type: application/json
 
 {
-    "compactorID": "A",
-    "items": {
-        "item1": 1,
-        "item2": 2,
-        "item3": 3,
-        "item4": 4,
-        "item5": 5,
-        "item6": 6
-    }
+    "compactorID": "B",
+    "items": [
+        {
+            "itemName": "crutches",
+            "itemQuantity": 5
+        },
+        {
+            "itemName": "walking frame",
+            "itemQuantity": 4
+        },
+        {
+            "itemName": "walking stick",
+            "itemQuantity": 3
+        }
+    ]
 }
 
+# {
+#     "compactorID": "A",
+#     "items": {
+#         "item1": 1,
+#         "item2": 2,
+#         "item3": 3,
+#         "item4": 4,
+#         "item5": 5,
+#         "item6": 6
+#     }
+# }
+
 ### UPDATE Testing [Compactor API]
-PATCH http://localhost:8082/api/compactor/62bbd9268364a01f858ec0a6
+PATCH http://localhost:8082/api/compactor/62bc36416d71fcb0f4511b14
 Content-Type: application/json
 
 {

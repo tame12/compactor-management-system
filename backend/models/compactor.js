@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const Item = require("./item.js")
+
 
 const CompactorSchema = new mongoose.Schema({
   compactorID: {
@@ -9,14 +11,17 @@ const CompactorSchema = new mongoose.Schema({
     type: Date,
     default: () => Date.now(),
   },
-  items: {
-    item1: Number,
-    item2: Number,
-    item3: Number,
-    item4: Number,
-    item5: Number,
-    item6: Number,
-  }
+  // items: {
+  //   item1: Number,
+  //   item2: Number,
+  //   item3: Number,
+  //   item4: Number,
+  //   item5: Number,
+  //   item6: Number,
+  // }
+  items: [
+    Item
+  ]
 });
 
 module.exports = Compactor = mongoose.model("compactor", CompactorSchema);
