@@ -41,7 +41,22 @@ const StockIn = () => {
     // extract items and which compactor they are being stocked in for 
     // assume that new items could have been added
     // await API call 
-    
+    const url = "http://localhost:8082/api/compactor"
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      alert(response.status)
+      return response.json();
+    }
+    catch(err) {
+      console.log("FE " + err)
+    }
     return 'successfully sent to compactor';
   }
 
@@ -94,6 +109,11 @@ const StockIn = () => {
         }
         const logStatus = sendToLogs(logsPayload)
 
+        const compactorPayload = {
+          "compactorID": compactor,
+          "changedItems": items
+        }
+        const compactorStatus = sendToCompactor(compactorPayload)
       }
     }
     catch(error){

@@ -5,7 +5,7 @@ GET http://localhost:8082/api/logging/test
 GET http://localhost:8082/api/logging
 
 ### GET ONE Testing [Logging API] !Works!
-GET http://localhost:8082/api/logging/62bc162557b8fe2ddc833cde
+GET http://localhost:8082/api/logging/62d15408617218727fc3850b
 
 ### POST Testing [Logging API] !Works!
 # This is the most important route for Logging
@@ -16,14 +16,20 @@ Content-Type: application/json
     "username": "Wisely123",
     "email": "Wisely@gmail.com",
     "compactorID": "A",
-    "changeditems": {
-        "item1": 1,
-        "item2": 1,
-        "item3": 1,
-        "item4": 1,
-        "item5": 1,
-        "item6": 1
-    }
+    "changedItems": [
+        {
+            "itemName": "crutches",
+            "itemQuantity": 5
+        },
+        {
+            "itemName": "walking frame",
+            "itemQuantity": 4
+        },
+        {
+            "itemName": "walking stick",
+            "itemQuantity": 3
+        }
+    ]
 }
 
 
