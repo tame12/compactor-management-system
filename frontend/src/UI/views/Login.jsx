@@ -12,7 +12,7 @@ const google = window.google;
 // console.log(process.env)
 // console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID)
 
-const Login = () => {
+const Login = (props) => {
   // state isnt good for using across components, if authentication system is outside of google use global state/redux/cache instead of state.
   const [ user, setUser ] = useState({});
   
@@ -24,6 +24,7 @@ const Login = () => {
     console.log("user: ",user);
     setUser(userObject);
     console.log("user Object has been set.");
+    props.setUser(response.credential)
   }
 
   useEffect(() =>{

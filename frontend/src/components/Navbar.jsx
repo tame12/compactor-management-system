@@ -35,7 +35,7 @@ const NavbarComponent = (props) => {
                                 </LinkContainer> */}
                             
 
-                            <div>{props.isAuthenticated ? "Yes":"No"}</div>
+                            {/* <div>{props.isAuthenticated ? "Yes":"No"}</div> */}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

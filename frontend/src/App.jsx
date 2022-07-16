@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Navigate } from 'react-router-dom';
+import { useState } from 'react';
 // Components
 import NavbarComponent from './components/Navbar';
 // Views
@@ -50,7 +51,7 @@ function App() {
 
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const isAuthenticated = false
+  // const isAuthenticated = false
   // componentDidMount() {
   //   function on(event, callback) {
   //     document.addEventListener(event, (e) => callback(e.detail));
@@ -72,13 +73,20 @@ function App() {
 
   // const isAuthenticated = false
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const setUser = (data) => {
+    // 👇️ take parameter passed from Child component
+    setIsAuthenticated(data);
+  };
+
   let loggedOutRoutes = 
     <Routes>
       {/* <Route exact path="/Login" element={<Login />} /> */}
-      <Route exact path="/stock-out" element={<Login />} />
-      <Route exact path="/stock-in" element={<Login />} />
-      <Route exact path="/logs" element={<Login />} />
-      <Route exact path="/" element={<Login />} />
+      <Route exact path="/stock-out" element={<Login setUser={setUser} />} />
+      <Route exact path="/stock-in" element={<Login setUser={setUser} />} />
+      <Route exact path="/logs" element={<Login setUser={setUser} />} />
+      <Route exact path="/" element={<Login setUser={setUser} />} />
     </Routes>
 
   let guardedRoutes = 
