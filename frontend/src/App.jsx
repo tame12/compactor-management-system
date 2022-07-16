@@ -46,6 +46,15 @@ function App() {
 
   // }, [] );
 
+  guardedRoute = 
+    <Routes>
+      <Route exact path="/" element={<Dashboard />} />
+      <Route exact path="/stock-out" element={<StockOut />} />
+      <Route exact path="/stock-in" element={<StockIn />} />
+      <Route exact path="/logs" element={<Logs />} />
+      <Route exact path="/Login" element={<Login />} />
+    </Routes>
+
   return (
     <div className="App">
       {/* <div id="signInDiv"></div>
