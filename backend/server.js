@@ -8,7 +8,6 @@ const port = process.env.PORT || 8082;
 
 
 
-console.log(`Your port is${process.env.MONGO_URI}`);
 // routes
 const compactor = require('./routes/api/compactor');
 const logging = require('./routes/api/logging')
