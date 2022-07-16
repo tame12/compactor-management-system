@@ -21,7 +21,9 @@ const Login = () => {
     console.log("encoded JWT ID token: ", response.credential);
     var userObject = jwt_decode(response.credential);
     console.log(userObject);
+    console.log("user: ",user);
     setUser(userObject);
+    console.log("user Object has been set.");
   }
 
   useEffect(() =>{

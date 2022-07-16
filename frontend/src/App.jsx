@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Navigate } from 'react-router-dom';
 // Components
 import NavbarComponent from './components/Navbar';
 // Views
@@ -46,13 +47,46 @@ function App() {
 
   // }, [] );
 
-  guardedRoute = 
+
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const isAuthenticated = false
+  // componentDidMount() {
+  //   function on(event, callback) {
+  //     document.addEventListener(event, (e) => callback(e.detail));
+  //   }
+  //   on("logged in", (data) =>
+  //     setIsAuthenticated(true)
+  //   )
+  // }
+
+  // function handleCallbackResponse(response) {
+  //   // JSON web token: response.credential => get google acc info
+  //   console.log("encoded JWT ID token: ", response.credential);
+  //   var userObject = jwt_decode(response.credential);
+  //   console.log(userObject);
+  //   console.log("user: ", user);
+  //   setUser(userObject);
+  //   console.log("user Object has been set.");
+  // }
+
+  // const isAuthenticated = false
+
+  let loggedOutRoutes = 
     <Routes>
-      <Route exact path="/" element={<Dashboard />} />
+      {/* <Route exact path="/Login" element={<Login />} /> */}
+      <Route exact path="/stock-out" element={<Login />} />
+      <Route exact path="/stock-in" element={<Login />} />
+      <Route exact path="/logs" element={<Login />} />
+      <Route exact path="/" element={<Login />} />
+    </Routes>
+
+  let guardedRoutes = 
+    <Routes>
       <Route exact path="/stock-out" element={<StockOut />} />
       <Route exact path="/stock-in" element={<StockIn />} />
       <Route exact path="/logs" element={<Logs />} />
-      <Route exact path="/Login" element={<Login />} />
+      <Route exact path="/" element={<Dashboard />} />
     </Routes>
 
   return (
@@ -66,17 +100,21 @@ function App() {
         </div>
       } */}
       <Router>
-        <NavbarComponent/>
-        <Routes>
-          <Route exact path="/" element={<Dashboard/>}/>
-          <Route exact path="/stock-out" element={<StockOut/>}/>
-          <Route exact path="/stock-in" element={<StockIn/>}/>
-          <Route exact path="/logs" element={<Logs/>}/>
-          <Route exact path="/Login" element={<Login/>}/>
-        </Routes>
+        <NavbarComponent isAuthenticated={isAuthenticated}/>
+        {isAuthenticated ? guardedRoutes: loggedOutRoutes}
       </Router>
     </div>
   );
+
+
 }
+
+// const mapStateToProps = state => {
+//   return {
+//     isAuthenticated: isAuthenticated(state),
+//   };
+// }
+
+// export default withRouter(connect(mapStateToProps)(App));
 
 export default App;
