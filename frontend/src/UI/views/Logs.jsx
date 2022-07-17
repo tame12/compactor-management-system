@@ -9,10 +9,6 @@ const Logs = () => {
 			.then((data) => setbackData(data));
 	}, []);
 	// I think the empty [] makes it render just 1x when the thing is loaded up.
-
-	// Getting Headers
-	console.log("Here is the logs Data:", logsData);
-
 	//   Data Pre-Processing
 	var headers = ``;
 	const titles = [
@@ -29,35 +25,37 @@ const Logs = () => {
 
 	// Getting Contents
 	var contents = ``;
-	var prevDate = new Date(logsData[0].createdAt)
-	prevDate = prevDate.getDate() +'/'+ prevDate.getMonth() + "/"+ prevDate.getFullYear()
+	var prevDate = null
 
 	for (var i=0;i < logsData.length; i++){
 		
-		var date = new Date(logsData[i].createdAt)
-		var currDate = date.getDate() +'/'+ date.getMonth() + "/"+ date.getFullYear()
-		if (currDate != prevDate){
-			prevDate = currDate
-			contents += `<tr class="blank_row" style="background-color: #A9A9A9;"><td colspan=${titles.length}></td></tr>`
-		}
-		contents += `<tr>`
-		contents += `<td>`+ currDate + `</td>`
-		
-		
+		// Checks if the movement key is present or not 
+		if ("movement" in logsData[i]){
+			for (var j=0;j<logsData[i].changedItems.length;j++){
+				var item = logsData[i].changedItems[j].itemName;
+				var quantity = logsData[i].changedItems[j].itemQuantity;
+				var date = new Date(logsData[i].createdAt)
+				var currDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
 
-		contents += `</tr>`
+				contents += `<tr>`
+				contents += `<td>`+ currDate + `</td>`
+				contents += `<td>`+ `${date.getHours()}${date.getMinutes()}` + `</td>`
+				contents += `<td>`+ logsData[i].compactorID + `</td>`
+				contents += `<td>`+ item + `</td>`
+				contents += `<td>`+ logsData[i].movement + `</td>`
+				contents += `<td>`+ quantity + `</td>`
+				contents += `<td>`+ logsData[i].email + `</td>`
+
+				// Inputs black row between 
+				if (currDate != prevDate && prevDate !== null){
+					prevDate = currDate
+					contents += `<tr class="blank_row" style="background-color: #A9A9A9;"><td colspan=${titles.length}></td></tr>`
+				}
+			}	
+		}
+
 		
 	}
-	// for (var i = 8; i < backData.values.length; i++) {
-	// 	var info = backData.values[i];
-	// 	var row = `<tr>`;
-	// for (var l = 0; l < info.length; l++){
-	//   row += `<td>${info[l]}</td>`;
-	// }
-	// row += `<tr>`;
-	// contents += row
-	// }
-
 	return (
 		<div>
 			<Table striped bordered hover>
