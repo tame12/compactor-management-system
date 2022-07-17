@@ -27,6 +27,14 @@ const Logs = () => {
 	var contents = ``;
 	var prevDate = null
 
+	// If you do date.minutes(), and time is 1.09pm, it will return 9 instead of 09. Function adds the 0 infront of the 9
+	function addZero(element){
+		if (element <= 9){
+			return '0' + element
+		}
+		return element
+	}
+
 	for (var i=0;i < logsData.length; i++){
 		
 		// Checks if the movement key is present or not 
@@ -39,7 +47,7 @@ const Logs = () => {
 
 				contents += `<tr>`
 				contents += `<td>`+ currDate + `</td>`
-				contents += `<td>`+ `${date.getHours()}${date.getMinutes()}` + `</td>`
+				contents += `<td>`+ `${date.getHours()}${addZero(date.getMinutes())}` + `</td>`
 				contents += `<td>`+ logsData[i].compactorID + `</td>`
 				contents += `<td>`+ item + `</td>`
 				contents += `<td>`+ logsData[i].movement + `</td>`
