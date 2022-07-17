@@ -5,10 +5,14 @@ import Col from 'react-bootstrap/Col';
 import ItemList from '../../components/ItemList';
 import { useState } from 'react';
 import AddItem from '../../components/AddItem';
+import jwt_decode from "jwt-decode"
 
-const StockOut = () => {
-  const [userName, setUserName] = useState("")
-  const [email, setEmail] = useState("")
+const StockOut = (props) => {
+  const user = jwt_decode(props.isAuthenticated)
+  const [userName, setUserName] = useState(user.name)
+  const [email, setEmail] = useState(user.email)
+  // const [userName, setUserName] = useState("")
+  // const [email, setEmail] = useState("")
   const [compactor, setCompactor] = useState(1)
   const [items, setItems] = useState([
     {

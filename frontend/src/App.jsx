@@ -91,8 +91,8 @@ function App() {
 
   let guardedRoutes = 
     <Routes>
-      <Route exact path="/stock-out" element={<StockOut />} />
-      <Route exact path="/stock-in" element={<StockIn />} />
+      <Route exact path="/stock-out" element={<StockOut isAuthenticated={isAuthenticated} />} />
+      <Route exact path="/stock-in" element={<StockIn isAuthenticated={isAuthenticated} />} />
       <Route exact path="/logs" element={<Logs />} />
       <Route exact path="/" element={<Dashboard />} />
     </Routes>

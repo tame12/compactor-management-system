@@ -5,11 +5,15 @@ import Col from 'react-bootstrap/Col';
 import ItemList from '../../components/ItemList';
 import { useState } from 'react';
 import AddItem from '../../components/AddItem';
+import jwt_decode from "jwt-decode"
 
 
-const StockIn = () => {
-  const [userName, setUserName] = useState("mock-username")
-  const [email, setEmail] = useState("mock@email")
+const StockIn = (props) => {
+  const user = jwt_decode(props.isAuthenticated)
+  const [userName, setUserName] = useState(user.name)
+  const [email, setEmail] = useState(user.email)
+  // const [userName, setUserName] = useState("mock-username")
+  // const [email, setEmail] = useState("mock@email")
   const [compactor, setCompactor] = useState(1)
   const [items, setItems] = useState([
     { 
