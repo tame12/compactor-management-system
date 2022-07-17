@@ -62,7 +62,7 @@ router.get("/:id", (req, res) => {
 // @description add/save logging 
 // @route POST api/logging
 // !!WORKS!!//
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
 	// const logging = new Logging({
 	// 	// loggingID: req.body.loggingID,
 	// 	username: req.body.username,
@@ -70,9 +70,10 @@ router.post('/', (req, res) => {
 	// 	compactorID: req.body.compactorID,
 	// 	changedTtems: req.body.changeditems
 	// })
+	console.log("Request Body:",req.body);
 	const logging = new Logging(req.body)
 	try {
-		const newLogging = logging.save()
+		const newLogging = await logging.save()
 		console.log("Successfully Added Log: " + newLogging)
 		res.status(201)
 	} catch (err) {

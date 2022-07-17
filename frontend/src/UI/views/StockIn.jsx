@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import ItemList from '../../components/ItemList';
 import { useState } from 'react';
 import AddItem from '../../components/AddItem';
+import jwt_decode from "jwt-decode"
 
 
 const StockIn = () => {
