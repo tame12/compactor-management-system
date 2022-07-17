@@ -19,7 +19,14 @@ const LoggingSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  // Technically there is no need to include all the items as parameters when logging, mongodb allows you to be flexible. 
+  changedItems: [
+    Item
+  ]
+});
+
+module.exports = Logging = mongoose.model('logging', LoggingSchema);
+
+// Technically there is no need to include all the items as parameters when logging, mongodb allows you to be flexible. 
   // changeditems: {
   //   item1: Number,
   //   item2: Number,
@@ -28,9 +35,3 @@ const LoggingSchema = new mongoose.Schema({
   //   item5: Number,
   //   item6: Number,
   // }
-  changedItems: [
-    Item
-  ]
-});
-
-module.exports = Logging = mongoose.model('logging', LoggingSchema);
