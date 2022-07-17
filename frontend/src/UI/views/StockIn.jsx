@@ -110,7 +110,7 @@ const StockIn = () => {
           "email": email,
           "compactorID": compactor,
           "changedItems": items,
-          "movement": 'Stock-In'
+          "movement": 'Stock-In '
         }
         const logStatus = sendToLogs(logsPayload)
 
