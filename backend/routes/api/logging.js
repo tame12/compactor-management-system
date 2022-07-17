@@ -71,7 +71,6 @@ router.post('/', (req, res) => {
 	// 	changedTtems: req.body.changeditems
 	// })
 	const logging = new Logging(req.body)
-	console.log(logging)
 	try {
 		const newLogging = logging.save()
 		console.log("Successfully Added Log: " + newLogging)
