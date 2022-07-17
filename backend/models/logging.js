@@ -21,7 +21,11 @@ const LoggingSchema = new mongoose.Schema({
   },
   changedItems: [
     Item
-  ]
+  ],
+  movement: {
+    type: String,
+    required: true
+  }
 });
 
 module.exports = Logging = mongoose.model('logging', LoggingSchema);
