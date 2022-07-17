@@ -74,10 +74,9 @@ router.post('/', async (req, res) => {
 	const logging = new Logging(req.body)
 	try {
 		const newLogging = await logging.save()
-		console.log("Successfully Added Log: " + newLogging)
-		res.status(201)
+		res.status(201).json({ message: "Successfully Sent to Logs"})
 	} catch (err) {
-		console.log("Backend problem " + err);
+		res.status(400).json({ message: err.message})
 	}
 })
 

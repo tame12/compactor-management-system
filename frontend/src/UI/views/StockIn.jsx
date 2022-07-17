@@ -8,9 +8,10 @@ import AddItem from '../../components/AddItem';
 import jwt_decode from "jwt-decode"
 
 
-const StockIn = () => {
-  const [userName, setUserName] = useState("Cupcake")
-  const [email, setEmail] = useState("cupcake@email")
+const StockIn = (props) => {
+  const user = jwt_decode(props.isAuthenticated)
+  const [userName, setUserName] = useState(user.name)
+  const [email, setEmail] = useState(user.email)
   const [compactor, setCompactor] = useState(1)
   const [items, setItems] = useState([
     { 
@@ -49,8 +50,7 @@ const StockIn = () => {
         },
         body: JSON.stringify(payload)
       })
-      alert(response.status)
-      return response.json();
+      return response.status;
     }
     catch(err) {
       console.log("FE " + err)
@@ -75,7 +75,7 @@ const StockIn = () => {
         body: JSON.stringify(payload)
         //perhaps i can replace payload with the actual correct data? but if i do that i'll have to do the logic here which seems difficult
       })
-      alert(response.status)
+      alert(`sent to compactor status:${response.status}`)
       return response.json();
     }
     catch(err) {
@@ -101,9 +101,6 @@ const StockIn = () => {
         throw new Error("Compactor does not exist");
       }
       else{
-        // call sendToCompactor
-        // call sendToLogs
-        // once both operations are successful, can redirect to confirmation page,.
         alert("sent!")
         const logsPayload = {
           "username": userName,
@@ -112,7 +109,11 @@ const StockIn = () => {
           "changedItems": items,
           "movement": 'Stock-In '
         }
-        const logStatus = sendToLogs(logsPayload)
+
+        sendToLogs(logsPayload)
+        .then((res) => alert(`Successfully Added to Logs, Code: ${res}`))
+        .catch((err) => console.log("error: ", err))
+
 
         const compactorPayload = {
           "inOrOut": "in",
@@ -121,7 +122,7 @@ const StockIn = () => {
           "items": items // has to be named "items"
         }
         // const compactorStatus = sendToCompactor(compactorPayload)
-        const compactorStatus = sendToCompactor(compactorPayload, compactor)
+        // const compactorStatus = sendToCompactor(compactorPayload, compactor)
       }
     }
     catch(error){
