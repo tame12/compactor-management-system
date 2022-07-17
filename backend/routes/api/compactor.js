@@ -149,24 +149,37 @@ async function getCompactorbyNumber(req, res, next) {
     return res.status(500).json({ message: err.message })
   }
 
-  res.compactor = compactor
+  res.compactor = compactor // use this variable to access the compactor returned
   next()
 }
 
 // @description Update compactor by Compactor Number, not ObjectID
 // @route POST api/compactor/:compactorID
 router.patch('/:compactorID', getCompactorbyNumber, async (req, res) => {
-  if (req.body.items != null) {
-    res.compactor.items = req.body.items
-    // changedItems = req.body.items
-    // currentItems = res.compactor.items
+  if (req.body.items != null) { // just in case an empty form is sent
+    var changedItems = req.body.items
+    var currentItems = res.compactor.items
+
+    res.compactor.items = req.body.items // this is the original PATCH function which just replaces the existing compactor with the request body
+    
+    // testing //
+    console.log("------------if i see this it works---------------------------")
+    console.log("res.compactor.items: ", res.compactor.items)
+    console.log("req.body.items: ", req.body.items) // 
+    console.log("req.body.inOrOut: ", req.body.inOrOut) // 
+    console.log("changedItems: ", changedItems) // 
+    console.log("currentItems: ", currentItems) // 
+    res.compactor.changedItems = "if i see this it works" // doesn't seem to work or show up inside MongoDB 
+    console.log("res.compactor.changedItems: ", res.compactor.changedItems)
     // create a function here that parses changedItems and edits currentItems and assigns it to finalItems
       // iterate through changedItems and checks whether it exists inside currentItems and adds if yes, edits if no
     // res.compactor.items = finalItems
 
   }
+
   try {
     const updatedCompactor = await res.compactor.save()
+		console.log("Successfully Updated Compactor: " + updatedCompactor)
     res.json(updatedCompactor)
   } catch (err) {
     res.status(400).json({ message: err.message})

@@ -70,25 +70,26 @@ PATCH http://localhost:8082/api/compactor/1
 Content-Type: application/json
 
 {
-    "compactorID": "1",
-    "items": [
-        {
-            "itemName": "crutches",
-            "itemQuantity": 1
-        },
-        {
-            "itemName": "walking frame",
-            "itemQuantity": 1
-        },
-        {
-            "itemName": "walking stick",
-            "itemQuantity": 1
-        },
-        {
-            "itemName": "running stick",
-            "itemQuantity": 1
-        }
-    ]
+  "compactorID": 1,
+  "items": [
+    {
+      "itemName": "crutches",
+      "itemQuantity": 5
+    },
+    {
+      "itemName": "walking frame",
+      "itemQuantity": 3
+    },
+    {
+      "itemName": "walking stick",
+      "itemQuantity": 4
+    },
+    {
+      "id": 7128,
+      "itemName": "stretcher",
+      "itemQuantity": "10"
+    }
+  ]
 }
 
 ### DELETE Testing by Compactor Number [Compactor API]

@@ -37,29 +37,6 @@ const StockIn = () => {
     setItems(items.filter((item) => item.itemName !== itemName))
   } 
 
-  const sendToCompactor = async (payload) => {
-    // extract items and which compactor they are being stocked in for 
-    // assume that new items could have been added
-    // await API call 
-    const url = "http://localhost:8082/api/compactor"
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-      alert(response.status)
-      return response.json();
-    }
-    catch(err) {
-      console.log("FE " + err)
-    }
-    return 'successfully sent to compactor';
-  }
-
   const sendToLogs = async (payload) => {
     const url = "http://localhost:8082/api/logging"
     try {
@@ -78,7 +55,34 @@ const StockIn = () => {
       console.log("FE " + err)
     }
   }
-  
+
+  const sendToCompactor = async (payload, compactorNumber) => {
+    // extract items and which compactor they are being stocked in for
+    // assume that new items could have been added
+    // await API call 
+    // var compactorNumber = 1 // hardcoded for testing. but works now
+    const url = "http://localhost:8082/api/compactor/" + String(compactorNumber)
+    // console.log(url)
+    // console.log(JSON.stringify(payload))
+    try {
+      const response = await fetch(url, {
+        method: 'PATCH',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+        //perhaps i can replace payload with the actual correct data? but if i do that i'll have to do the logic here which seems difficult
+      })
+      alert(response.status)
+      return response.json();
+    }
+    catch(err) {
+      console.log("FE " + err)
+    }
+    return 'successfully sent to compactor';
+  }
+
   const onSubmit = (e) => {
     e.preventDefault()
     // check for name, email, compactor number and items to be added
@@ -110,10 +114,13 @@ const StockIn = () => {
         const logStatus = sendToLogs(logsPayload)
 
         const compactorPayload = {
+          "inOrOut": "in",
           "compactorID": compactor,
-          "changedItems": items
+          "changedItems": items, // keep in mind that the items that are changed here will be directly sent to the payload
+          "items": items // has to be named "items"
         }
-        const compactorStatus = sendToCompactor(compactorPayload)
+        // const compactorStatus = sendToCompactor(compactorPayload)
+        const compactorStatus = sendToCompactor(compactorPayload, compactor)
       }
     }
     catch(error){

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Update Logic Testing </h1>
+<p>Thinking of using the find() function to figure something out</p>
+<p>find() returns the value of the first element in an array that passes a test (provided by a function):</p>
+<p>returns undefined if no item found inside the array</p>
+<hr>
+<p id="demo"><b>Testing the .find() method</b> <br></p>
+<hr>
+<p id="demo2"><b>Looping through the changedItems array</b><br></p>
+<hr>
+<p id="demo3"><b>The first changedItem that is inside the currentItems</b><br></p>
+<hr>
+<p id="demo4"><b>Testing if the loop detects an item that is not currently inside. (Should display "undefined" if a new item exists) </b><br> </p>
+<hr>
+<p id="demo5"><b>Testing if the loop detects an item that is currently inside (Should display "undefined" if the changedItems are NOT currently inside</b><br></p>
+
+
+<script>
+var currentItems = [
+	{itemName: "A", itemQuantity: 5}, 
+  {itemName: "B", itemQuantity:3}
+];
+
+var changedItems = [
+	{itemName:"A" , itemQuantity: 1},
+  {itemName:"B" ,itemQuantity: 1},
+  {itemName:"B", itemQuantity: 9}
+];
+
+// testing the .find() function
+var result = currentItems.find(obj => {
+  return obj.itemName === "A"
+})
+
+// testing the loop
+var result2 = "";
+for (let i in changedItems) {
+	result2 += changedItems[i].itemName + "<br>";
+}
+
+// testing the combined loop
+for (let i in changedItems) {
+  // checks whether current item is insideOrNot
+  var insideOrNot = currentItems.find(item => {
+    return item.itemName == changedItems[i].itemName })
+  // conditional
+  if (insideOrNot == undefined) {
+    var conditional = "there is a changed item that is not currently inside"
+  }
+  else {
+    var conditional2 = "there is a changed item that is currently inside"
+  }
+}
+
+document.getElementById("demo").innerHTML += JSON.stringify(result)
+document.getElementById("demo2").innerHTML += result2
+document.getElementById("demo3").innerHTML += JSON.stringify(insideOrNot)
+document.getElementById("demo4").innerHTML += conditional
+document.getElementById("demo5").innerHTML += conditional2
+
+</script>
+
+</body>
+</html>
