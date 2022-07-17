@@ -8,8 +8,8 @@ import AddItem from '../../components/AddItem';
 
 
 const StockIn = () => {
-  const [userName, setUserName] = useState("mock-username")
-  const [email, setEmail] = useState("mock@email")
+  const [userName, setUserName] = useState("Cupcake")
+  const [email, setEmail] = useState("cupcake@email")
   const [compactor, setCompactor] = useState(1)
   const [items, setItems] = useState([
     { 
@@ -65,7 +65,6 @@ const StockIn = () => {
   }
   
   const onSubmit = (e) => {
-    alert("sent!")
     e.preventDefault()
     // check for name, email, compactor number and items to be added
     try {
@@ -85,12 +84,13 @@ const StockIn = () => {
         // call sendToCompactor
         // call sendToLogs
         // once both operations are successful, can redirect to confirmation page,.
-
+        alert("sent!")
         const logsPayload = {
           "username": userName,
           "email": email,
           "compactorID": compactor,
-          "changedItems": items
+          "changedItems": items,
+          "movement": 'Stock-In'
         }
         const logStatus = sendToLogs(logsPayload)
 
