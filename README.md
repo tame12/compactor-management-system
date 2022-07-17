@@ -17,6 +17,7 @@ This project aims to solve a problem that SGH-Physiotherapy department is curren
 3. Create a new terminal and cd into the frontend folder.
 4. Run `npm install` .
 5. After packages are installed, run `npm run start` this will setup the frontend react web application.
+6. Download VSCode Extension "REST Client" by Huachao Mao to Test Backend APIs via "Compactor API Testing.rest" and "Logging API Testing.rest"
 
 
 # Packages and Libraries Used

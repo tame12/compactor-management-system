@@ -25,13 +25,26 @@ router.get("/", (req, res) => {
 // @description Get single compactor by id
 // @route GET api/compactor/:id
 // Works!
-router.get("/:id", (req, res) => {
+// This is commented out for now so that the route below works, because it is more likely for us to findby Compactor Number rather than Object ID
+router.get("/mongoID/:id", (req, res) => {
 	Compactor.findById(req.params.id)
 		.then((compactor) => res.json(compactor))
 		.catch((err) =>
 			res.status(404).json({ nocompactorfound: "No compactor found" })
 		);
 });
+
+// @description Get single compactor by specifying Compactor 1 or Compactor 2
+// @route GET api/compactor/:id
+// WORKS!!!
+router.get("/:compactorID", (req, res) => {
+  Compactor.findOne({ compactorID: req.params.compactorID })
+		.then((compactor) => res.json(compactor))
+		.catch((err) =>
+			res.status(404).json({ nocompactorfound: "No compactor found" })
+		);
+});
+
 
 // @description add/save compactor
 // @route POST api/compactor/post
@@ -75,7 +88,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-// Finding Compactor ID Middleware for Update and Delete Routes
+// Finding Compactor ID Middleware for Update and Delete Routes (Using Object ID)
 async function getCompactor(req, res, next) {
   let compactor
   try {
@@ -92,8 +105,8 @@ async function getCompactor(req, res, next) {
 }
 
 // @description Update compactor
-// @route POST api/compactor/:id
-router.patch('/:id', getCompactor, async (req, res) => {
+// @route POST api/compactor/:id 
+router.patch('/mongoID/:id', getCompactor, async (req, res) => {
   if (req.body.compactorID != null) {
     res.compactor.compactorID = req.body.compactorID
   }
@@ -111,7 +124,7 @@ router.patch('/:id', getCompactor, async (req, res) => {
 // @description Delete compactor by id
 // @route POST api/compactor/:id
 
-router.delete("/:id", getCompactor, async (req, res) => {
+router.delete("/mongoID/:id", getCompactor, async (req, res) => {
   try {
     await res.compactor.remove()
     res.json({ message: "Compactor Deleted Successfully" })
@@ -120,5 +133,72 @@ router.delete("/:id", getCompactor, async (req, res) => {
     res.status(500).json({ message: err.message })
   }
 })
+
+
+
+// Finding Compactor ID Middleware for Update and Delete Routes (Using Compactor Number 1 or 2)
+async function getCompactorbyNumber(req, res, next) {
+  let compactor
+  try {
+    // compactor = await Compactor.findById(req.params.id)
+    compactor = await Compactor.findOne({ compactorID: req.params.compactorID })
+    if (compactor == null) {
+      return res.status(404).json({ message: 'Cannot find compactor' })
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message })
+  }
+
+  res.compactor = compactor // use this variable to access the compactor returned
+  next()
+}
+
+// @description Update compactor by Compactor Number, not ObjectID
+// @route POST api/compactor/:compactorID
+router.patch('/:compactorID', getCompactorbyNumber, async (req, res) => {
+  if (req.body.items != null) { // just in case an empty form is sent
+    var changedItems = req.body.items
+    var currentItems = res.compactor.items
+
+    res.compactor.items = req.body.items // this is the original PATCH function which just replaces the existing compactor with the request body
+    
+    // testing //
+    console.log("------------if i see this it works---------------------------")
+    console.log("res.compactor.items: ", res.compactor.items)
+    console.log("req.body.items: ", req.body.items) // 
+    console.log("req.body.inOrOut: ", req.body.inOrOut) // 
+    console.log("changedItems: ", changedItems) // 
+    console.log("currentItems: ", currentItems) // 
+    res.compactor.changedItems = "if i see this it works" // doesn't seem to work or show up inside MongoDB 
+    console.log("res.compactor.changedItems: ", res.compactor.changedItems)
+    // create a function here that parses changedItems and edits currentItems and assigns it to finalItems
+      // iterate through changedItems and checks whether it exists inside currentItems and adds if yes, edits if no
+    // res.compactor.items = finalItems
+
+  }
+
+  try {
+    const updatedCompactor = await res.compactor.save()
+		console.log("Successfully Updated Compactor: " + updatedCompactor)
+    res.json(updatedCompactor)
+  } catch (err) {
+    res.status(400).json({ message: err.message})
+  }
+})
+
+// @description Delete compactor by id
+// @route POST api/compactor/:id
+
+router.delete("/:compactorID", getCompactorbyNumber, async (req, res) => {
+  try {
+    await res.compactor.remove()
+    res.json({ message: "Compactor Deleted Successfully" })
+
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+})
+
+
 
 module.exports = router;

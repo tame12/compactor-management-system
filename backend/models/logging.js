@@ -35,13 +35,3 @@ module.exports = Logging = mongoose.model('logging', LoggingSchema);
   //   item5: Number,
   //   item6: Number,
   // }
-  changedItems: [
-    Item
-  ],
-  movement:{
-    type: String,
-    required: true
-  }
-});
-
-module.exports = Logging = mongoose.model('logging', LoggingSchema);
