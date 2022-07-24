@@ -7,59 +7,122 @@
 <p>find() returns the value of the first element in an array that passes a test (provided by a function):</p>
 <p>returns undefined if no item found inside the array</p>
 <hr>
-<p id="demo"><b>Testing the .find() method</b> <br></p>
+<p id="demo0"><b>0. Current items and Stockout Items</b> <br></p>
 <hr>
-<p id="demo2"><b>Looping through the changedItems array</b><br></p>
+<p id="demo"><b>1. Testing the .find() method</b> <br></p>
 <hr>
-<p id="demo3"><b>The first changedItem that is inside the currentItems</b><br></p>
+<p id="demo2"><b>2. Looping through the changedItems array</b><br></p>
 <hr>
-<p id="demo4"><b>Testing if the loop detects an item that is not currently inside. (Should display "undefined" if a new item exists) </b><br> </p>
+<p id="demo3"><b>3. The first changedItem that is inside the currentItems</b><br></p>
 <hr>
-<p id="demo5"><b>Testing if the loop detects an item that is currently inside (Should display "undefined" if the changedItems are NOT currently inside</b><br></p>
+<p id="demo4"><b>4. Testing if the loop detects an item that is not currently inside. (Should display "undefined" if a new item exists) </b><br> </p>
+<hr>
+<p id="demo5"><b>5. Testing if the loop detects an item that is currently inside (Should display "undefined" if the changedItems are NOT currently inside</b><br></p>
+<hr>
+<p id="demo6"><b>6. Testing the finalItems logic</b><br></p>
+<hr>
+<p id="demo7"><b>7. changedItem[i] is </b><br></p>
+<hr>
+<p id="demo8"><b>8. currentQuantity, name, changedQuantity </b><br></p>
+<hr>
+<p id="demo9"><b>9. Updating existing items that are not edited </b><br></p>
 
 
 <script>
-var currentItems = [
+// be aware that the logic tested in this file is to be implemented inside the "compactor.js" PATCH route
+var currentItems = [ // these are the items that are currently inside the database
 	{itemName: "A", itemQuantity: 5}, 
-  {itemName: "B", itemQuantity:3}
+  {itemName: "B", itemQuantity:3},
+  {itemName: "F", itemQuantity:99},
+  {itemName: "G", itemQuantity:99},
 ];
 
-var changedItems = [
+var changedItems = [  // these are the items inside the stockin/stockout form
 	{itemName:"A" , itemQuantity: 1},
   {itemName:"B" ,itemQuantity: 1},
-  {itemName:"B", itemQuantity: 9}
+  {itemName:"C", itemQuantity: 9},
+  {itemName:"D", itemQuantity: 10},
+  {itemName:"F", itemQuantity: 1},
 ];
 
-// testing the .find() function
+var movement = 'Stock-In'
+// var movement = 'Stock-Out'
+// 1. testing the .find() function
 var result = currentItems.find(obj => {
   return obj.itemName === "A"
 })
 
-// testing the loop
+// 2. testing the loop
 var result2 = "";
 for (let i in changedItems) {
 	result2 += changedItems[i].itemName + "<br>";
 }
 
-// testing the combined loop
+// 3,4 and 5 testing the combined loop
+var finalItems = []
 for (let i in changedItems) {
   // checks whether current item is insideOrNot
-  var insideOrNot = currentItems.find(item => {
+  var insideOrNot = currentItems.find(item => { // this will assign insideOrNot to the changedItem if found/undefined if not found
     return item.itemName == changedItems[i].itemName })
   // conditional
-  if (insideOrNot == undefined) {
+  if (insideOrNot == undefined) { // for a new item that is not currently inside
     var conditional = "there is a changed item that is not currently inside"
+    // a new variable should be created here for an array..? or whatever it is to be inserted into the new databse
+    var check = [changedItems[i]]
+    if (movement == "Stock-In") { // Only works for Stock in, if Stock Out there shouldn't exist an item that doesn't currently exist
+      finalItems = finalItems.concat([changedItems[i]]) // works
+    }
   }
-  else {
+  else { // for editing an existing item that is not already inside
     var conditional2 = "there is a changed item that is currently inside"
+    // the old variable should be retrieved and incremented over here...????
+    // get the current item quantity using the variable
+    var currQuantity = insideOrNot.itemQuantity // works
+    var itemname = changedItems[i].itemName // works
+    var changedQuantity = changedItems[i].itemQuantity // works
+    if (movement == "Stock-In") {
+      var newQuantity = currQuantity + changedQuantity
+    } 
+    else if (movement == "Stock-Out"){
+      var newQuantity = currQuantity - changedQuantity
+    }
+    var newItem = {itemName:itemname, itemQuantity: newQuantity}
+    finalItems = finalItems.concat([newItem])
+
   }
 }
+var originalFinalItems = finalItems
 
+// Comparing finalItems and the original currentItems to see if there are any existing untouched items and adding them in
+var existingOrNotTracker = []
+for (let i in currentItems) {
+  // var existingOrNot = finalItems.find(item => {
+  //   return item.itemName == currentItems[i].itemName
+  // })
+  var existingOrNot = finalItems.find(item => {
+    return item.itemName == currentItems[i].itemName
+  })
+  // existingOrNotTracker = existingOrNotTracker.concat([existingOrNot])
+  // existingOrNotTracker = originalFinalItems
+  // existingOrNotTracker = existingOrNotTracker.concat([currentItems[i]]) 
+  if (existingOrNot == undefined) { // this means that an existing item that has not been edited is found
+    finalItems = finalItems.concat([currentItems[i]])
+  }
+}
+var newFinalItems = finalItems
+
+document.getElementById("demo0").innerHTML += "<b>currentItems: </b><br>" + JSON.stringify(currentItems) + "<br><br>" + "<b>changedItems: </b><br>" + JSON.stringify(changedItems)
 document.getElementById("demo").innerHTML += JSON.stringify(result)
 document.getElementById("demo2").innerHTML += result2
-document.getElementById("demo3").innerHTML += JSON.stringify(insideOrNot)
+document.getElementById("demo3").innerHTML += "insideOrNot: " + JSON.stringify(insideOrNot)
 document.getElementById("demo4").innerHTML += conditional
 document.getElementById("demo5").innerHTML += conditional2
+document.getElementById("demo6").innerHTML += "finalItems: <br>" + JSON.stringify(finalItems)
+document.getElementById("demo7").innerHTML += JSON.stringify(check)
+document.getElementById("demo8").innerHTML += currQuantity  + "<br>" + itemname + "<br>" + changedQuantity + "<br>" + newQuantity + "<br>" + movement + "<br>" + JSON.stringify(newItem)
+document.getElementById("demo9").innerHTML += "existingOrNot: " + JSON.stringify(existingOrNot) + "<br>" + "originalFinalItems:<br>" + JSON.stringify(originalFinalItems) + "<br><br>newFinalItems:<br> " + JSON.stringify(newFinalItems)
+
+
 
 </script>
 
