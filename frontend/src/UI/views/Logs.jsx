@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 
 const Logs = () => {
-	const [logsData, setbackData] = useState([{}]);
+	var [logsData, setbackData] = useState([{}]);
 	useEffect(() => {
 		fetch("http://localhost:8082/api/logging")
 			.then((response) => response.json())
@@ -12,63 +12,118 @@ const Logs = () => {
 	//   Data Pre-Processing
 	var headers = ``;
 	const titles = [
-		'Date',
-		'Time',
-		'Compactor',
-		'Item',
-		'Stock In / Stock Out',
-		'Quantity',
-		'Person',
-
-	]
-	titles.map((header) => headers += `<th key=${header}>${header}</th>`)
-
+		"Date",
+		"Time",
+		"Compactor",
+		"Item",
+		"Stock In / Stock Out",
+		"Quantity",
+		"Person",
+	];
+	titles.map((header) => (headers += `<th key=${header}>${header}</th>`));
+	
 	// Getting Contents
-	var contents = ``;
-	var prevDate = null
+	// var contents = ``;
+	// var prevDate = null
 
 	// If you do date.minutes(), and time is 1.09pm, it will return 9 instead of 09. Function adds the 0 infront of the 9
-	function addZero(element){
-		if (element <= 9){
-			return '0' + element
+	function addZero(element) {
+		if (element <= 9) {
+			return "0" + element;
 		}
-		return element
+		return element;
 	}
 
-	for (var i=0;i < logsData.length; i++){
-		
-		// Checks if the movement key is present or not 
-		if ("movement" in logsData[i]){
-			for (var j=0;j<logsData[i].changedItems.length;j++){
-				var item = logsData[i].changedItems[j].itemName;
-				var quantity = logsData[i].changedItems[j].itemQuantity;
-				var date = new Date(logsData[i].createdAt)
-				var currDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+	function reverser(array){
+		var newArray = []
+		for (var i=array.length-1;i>=0;i--){
+			newArray.push(array[i])
+			var date = new Date(array[i].createdAt);
+			var currDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+			uniqueCompactors.add(array[i].compactorID);
+			uniquePersons.add(array[i].email);
+			uniqueMovements.add(array[i].movement);
+			uniqueDates.add(currDate);
 
-				contents += `<tr>`
-				contents += `<td>`+ currDate + `</td>`
-				contents += `<td>`+ `${date.getHours()}${addZero(date.getMinutes())}` + `</td>`
-				contents += `<td>`+ logsData[i].compactorID + `</td>`
-				contents += `<td>`+ item + `</td>`
-				contents += `<td>`+ logsData[i].movement + `</td>`
-				contents += `<td>`+ quantity + `</td>`
-				contents += `<td>`+ logsData[i].email + `</td>`
-
-				// Inputs black row between 
-				if (currDate != prevDate && prevDate !== null){
-					prevDate = currDate
-					contents += `<tr class="blank_row" style="background-color: #A9A9A9;"><td colspan=${titles.length}></td></tr>`
-				}
-			}	
 		}
-
-		
+		return newArray
 	}
+	var uniqueDates = new Set()
+	var uniqueCompactors = new Set()
+	var uniqueItems = new Set()
+	var uniqueMovements = new Set()
+	var uniquePersons = new Set()
+	var uniqueArray = [uniqueDates,'',uniqueCompactors,uniqueItems,uniqueMovements,'',uniquePersons]
+	var items = reverser(logsData);
+	
+	const [dateSearch, setDateSearch] = useState(new Set());
+	// const [compactorSearch, setCompactorSearch] = useState(new Set());
+	// const [itemSearch, setItemSearch] = useState(new Set());
+	// const [movementSearch, setMovementSearch] = useState(new Set());
+	// const [personSearch, setPersonSearch] = useState(new Set());
+
+	// var storage = new Set();
+	
 	return (
 		<div>
 			<Table striped bordered hover>
-				<thead dangerouslySetInnerHTML={{ __html: headers }}></thead>
-				<tbody dangerouslySetInnerHTML={{ __html: contents }}></tbody>
+				<thead>
+					<tr>
+						{titles.map((val) => {
+							var index = titles.indexOf(val)
+							return <th>{val}
+							
+							<select name={val} id={val}>
+								{
+								
+								uniqueArray.filter((array) =>{
+									if (array.size != 0 && uniqueArray.indexOf(array) == index){
+										return array
+									}
+								}).map((data)=>{
+									[...data].map((options)=>{
+										console.log(options);
+										return (
+											<option>{options}</option>
+										)
+									})									
+								})
+								}
+
+							</select>
+							</th>;
+						})}
+					</tr>
+				</thead>
+				<tbody>
+					{items
+						.filter((val) => {
+							if ("movement" in val && "changedItems" in val) {
+								return val;
+							}
+						})
+						.map((val, key) => {
+							var date = new Date(val.createdAt);
+							var currDate = `${date.getDate()}/${
+								date.getMonth() + 1
+							}/${date.getFullYear()}`;
+							for (var j = 0; j < val.changedItems.length; j++) {
+								return (
+									<tr>
+										<td>{currDate}</td>
+										<td>{`${date.getHours()}${addZero(date.getMinutes())}`}</td>
+										<td>{val.compactorID}</td>
+										<td>{val.changedItems[j].itemName}</td>
+										<td>{val.movement}</td>
+										<td>{val.changedItems[j].itemQuantity}</td>
+										<td>{val.email}</td>
+									</tr>
+								);
+							}
+						})}
+						
+
+				</tbody>
 			</Table>
 		</div>
 	);
