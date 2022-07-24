@@ -72,8 +72,7 @@ const Logs = () => {
 						{titles.map((val) => {
 							var index = titles.indexOf(val)
 							return <th>{val}
-							
-							<select name={val} id={val}>
+							<div name={val} id={val}>
 								{
 								
 								uniqueArray.filter((array) =>{
@@ -81,16 +80,17 @@ const Logs = () => {
 										return array
 									}
 								}).map((data)=>{
-									[...data].map((options)=>{
-										console.log(options);
-										return (
-											<option>{options}</option>
-										)
-									})									
+									return (
+										<select name={val} id={val}>{[...data].map((o)=>{
+											return <option>{o}</option>
+										})}</select>
+									)
 								})
+								
 								}
-
-							</select>
+							
+								
+							</div>
 							</th>;
 						})}
 					</tr>
