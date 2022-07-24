@@ -82,7 +82,7 @@ router.post('/', async (req, res) => {
   })
   try {
     const newCompactor = await compactor.save()
-    res.status(201).json(newCompactor)
+    res.status(201).json({ message: "Successfully Updated Compactor"})
   } catch (err) {
     res.status(400).json({ message: err.message })
   }

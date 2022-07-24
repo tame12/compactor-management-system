@@ -11,8 +11,6 @@ const StockOut = (props) => {
   const user = jwt_decode(props.isAuthenticated)
   const [userName, setUserName] = useState(user.name)
   const [email, setEmail] = useState(user.email)
-  // const [userName, setUserName] = useState("")
-  // const [email, setEmail] = useState("")
   const [compactor, setCompactor] = useState(1)
   const [items, setItems] = useState([
     {
@@ -59,8 +57,7 @@ const StockOut = (props) => {
         },
         body: JSON.stringify(payload)
       })
-      alert(response.status)
-      return response.json();
+      return response.status;
     }
     catch (err) {
       console.log("FE " + err)
@@ -95,7 +92,10 @@ const StockOut = (props) => {
           "changedItems": items,
           "movement": 'Stock-Out'
         }
-        const logStatus = sendToLogs(logsPayload)
+        sendToLogs(logsPayload)
+          .then((res) => alert(`Successfully Added to Logs, Code: ${res}`))
+          .catch((err) => console.log("error: ", err))
+
 
       }
     }
