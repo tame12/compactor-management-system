@@ -30,9 +30,9 @@ const NavbarComponent = (props) => {
                                     <Nav.Link>Logs</Nav.Link>
                                 </LinkContainer>
 
-                                {/* <LinkContainer to="/Login">
-                                    <Nav.Link>Login</Nav.Link>
-                                </LinkContainer> */}
+                                <LinkContainer to="/Login">
+                                    <Nav.Link>Logout</Nav.Link>
+                                </LinkContainer>
                             
 
                             {/* <div>{props.isAuthenticated ? "Yes":"No"}</div> */}

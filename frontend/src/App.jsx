@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // Components
 import NavbarComponent from './components/Navbar';
 // Views
@@ -75,18 +75,30 @@ function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const setUser = (data) => {
-    // 👇️ take parameter passed from Child component
-    setIsAuthenticated(data);
-  };
+  // const setUser = (data) => {
+  //   // 👇️ take parameter passed from Child component
+  //   setIsAuthenticated(data);
+  // };
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("token")
+    if (token !== null) {
+      setIsAuthenticated(token)
+    }
+  });
 
   let loggedOutRoutes = 
     <Routes>
       {/* <Route exact path="/Login" element={<Login />} /> */}
-      <Route exact path="/stock-out" element={<Login setUser={setUser} />} />
+      {/* <Route exact path="/stock-out" element={<Login setUser={setUser} />} />
       <Route exact path="/stock-in" element={<Login setUser={setUser} />} />
       <Route exact path="/logs" element={<Login setUser={setUser} />} />
-      <Route exact path="/" element={<Login setUser={setUser} />} />
+      <Route exact path="/" element={<Login setUser={setUser} />} /> */}
+      <Route exact path="/stock-out" element={<Login/>} />
+      <Route exact path="/stock-in" element={<Login/>} />
+      <Route exact path="/logs" element={<Login/>} />
+      <Route exact path="/login" element={<Login />} />
+      <Route exact path="/" element={<Login/>} />
     </Routes>
 
   let guardedRoutes = 
@@ -94,6 +106,7 @@ function App() {
       <Route exact path="/stock-out" element={<StockOut isAuthenticated={isAuthenticated} />} />
       <Route exact path="/stock-in" element={<StockIn isAuthenticated={isAuthenticated} />} />
       <Route exact path="/logs" element={<Logs />} />
+      <Route exact path="/login" element={<Login />} />
       <Route exact path="/" element={<Dashboard />} />
     </Routes>
 
