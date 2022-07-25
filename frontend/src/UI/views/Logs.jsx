@@ -56,11 +56,19 @@ const Logs = () => {
 	var uniqueArray = [uniqueDates,'',uniqueCompactors,uniqueItems,uniqueMovements,'',uniquePersons]
 	var items = reverser(logsData);
 	
-	const [dateSearch, setDateSearch] = useState(new Set());
-	// const [compactorSearch, setCompactorSearch] = useState(new Set());
-	// const [itemSearch, setItemSearch] = useState(new Set());
-	// const [movementSearch, setMovementSearch] = useState(new Set());
-	// const [personSearch, setPersonSearch] = useState(new Set());
+	const [dateSearch, setDateSearch] = useState('');
+	const [compactorSearch, setCompactorSearch] = useState("");
+	const [itemSearch, setItemSearch] = useState('');
+	const [movementSearch, setMovementSearch] = useState("");
+	const [personSearch, setPersonSearch] = useState("");
+
+	var uniqueSetter = [setDateSearch,'',setCompactorSearch,setItemSearch,setMovementSearch,'',setPersonSearch]
+
+	function checker(value){
+		console.log(value);
+		return value
+	}
+
 
 	// var storage = new Set();
 	
@@ -81,7 +89,9 @@ const Logs = () => {
 									}
 								}).map((data)=>{
 									return (
-										<select name={val} id={val}>{[...data].map((o)=>{
+										<select name={val} id={index} onChange={(event)=>{
+											uniqueSetter[index](event.target.value)
+										}}>{[...data].map((o)=>{
 											return <option>{o}</option>
 										})}</select>
 									)
@@ -99,7 +109,7 @@ const Logs = () => {
 					{items
 						.filter((val) => {
 							if ("movement" in val && "changedItems" in val) {
-								return val;
+								return checker(val)
 							}
 						})
 						.map((val, key) => {
