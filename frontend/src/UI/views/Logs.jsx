@@ -48,12 +48,12 @@ const Logs = () => {
 					uniqueCompactors.add(array[i].compactorID.trim().replace(/`/g, ""));
 					uniquePersons.add(array[i].email.trim().replace(/`/g, ""));
 					uniqueMovements.add(array[i].movement.trim().replace(/`/g, ""));
-					uniqueDates.add(currDate);
 					uniqueItems.add(item.itemName.trim().replace(/`/g, ""))
 				})
 
 				var date = new Date(array[i].createdAt);
 				var currDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+				uniqueDates.add(currDate);
 			}
 
 		}
@@ -66,8 +66,6 @@ const Logs = () => {
 	var uniquePersons = new Set().add("all")
 	var uniqueArray = [uniqueDates,'',uniqueCompactors,uniqueItems,uniqueMovements,'',uniquePersons]
 	var items = reverser(logsData);
-
-	console.log(items);
 
 	const [dateSearch, setDateSearch] = useState('');
 	const [compactorSearch, setCompactorSearch] = useState("");
