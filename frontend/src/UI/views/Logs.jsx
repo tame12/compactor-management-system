@@ -22,10 +22,6 @@ const Logs = () => {
 	];
 	titles.map((header) => (headers += `<th key=${header}>${header}</th>`));
 	
-	// Getting Contents
-	// var contents = ``;
-	// var prevDate = null
-
 	// If you do date.minutes(), and time is 1.09pm, it will return 9 instead of 09. Function adds the 0 infront of the 9
 	function addZero(element) {
 		if (element <= 9) {
@@ -76,7 +72,6 @@ const Logs = () => {
 	var uniqueSetter = [setDateSearch,'',setCompactorSearch,setItemSearch,setMovementSearch,'',setPersonSearch]
 
 	// this is the main function that filters the results
-
 	function checker(value){
 		var toReturn = true
 		var date = new Date(value.createdAt);
