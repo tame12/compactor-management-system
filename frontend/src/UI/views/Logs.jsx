@@ -34,16 +34,23 @@ const Logs = () => {
 		return element;
 	}
 
+	// reverses the array while adding the unique elements inside
 	function reverser(array){
 		var newArray = []
 		for (var i=array.length-1;i>=0;i--){
-			newArray.push(array[i])
-			var date = new Date(array[i].createdAt);
-			var currDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-			uniqueCompactors.add(array[i].compactorID);
-			uniquePersons.add(array[i].email);
-			uniqueMovements.add(array[i].movement);
-			uniqueDates.add(currDate);
+			if ("movement" in array[i] && "changedItems" in array[i]){
+				newArray.push(array[i])
+				var date = new Date(array[i].createdAt);
+				var currDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+				array[i].changedItems.map((changedItem)=>{
+					uniqueCompactors.add(array[i].compactorID);
+					uniquePersons.add(array[i].email);
+					uniqueMovements.add(array[i].movement);
+					uniqueDates.add(currDate);
+					uniqueItems.add(changedItem.itemName)
+
+				})
+			}
 
 		}
 		return newArray
@@ -99,7 +106,7 @@ const Logs = () => {
 							return <th>{val}
 							<div name={val} id={val}>
 								{
-								
+								// Renders the dropdown select
 								uniqueArray.filter((array) =>{
 									if (array.size != 0 && uniqueArray.indexOf(array) == index){
 										return array
@@ -108,6 +115,7 @@ const Logs = () => {
 									return (
 										<select name={val} id={index} onChange={(event)=>{
 											uniqueSetter[index](event.target.value)
+											console.log();
 										}}>{[...data].map((o)=>{
 											return <option>{o}</option>
 										})}</select>
@@ -134,19 +142,22 @@ const Logs = () => {
 							var currDate = `${date.getDate()}/${
 								date.getMonth() + 1
 							}/${date.getFullYear()}`;
-							for (var j = 0; j < val.changedItems.length; j++) {
+							return (
+								val.changedItems.map((changedItem)=>{
 								return (
 									<tr>
 										<td>{currDate}</td>
 										<td>{`${date.getHours()}${addZero(date.getMinutes())}`}</td>
 										<td>{val.compactorID}</td>
-										<td>{val.changedItems[j].itemName}</td>
+										<td>{changedItem.itemName}</td>
 										<td>{val.movement}</td>
-										<td>{val.changedItems[j].itemQuantity}</td>
+										<td>{changedItem.itemQuantity}</td>
 										<td>{val.email}</td>
 									</tr>
 								);
-							}
+							})
+
+							)
 						})}
 						
 
