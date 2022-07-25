@@ -48,11 +48,11 @@ const Logs = () => {
 		}
 		return newArray
 	}
-	var uniqueDates = new Set()
-	var uniqueCompactors = new Set()
-	var uniqueItems = new Set()
-	var uniqueMovements = new Set()
-	var uniquePersons = new Set()
+	var uniqueDates = new Set().add("all")
+	var uniqueCompactors =new Set().add("all")
+	var uniqueItems = new Set().add("all")
+	var uniqueMovements = new Set().add("all")
+	var uniquePersons = new Set().add("all")
 	var uniqueArray = [uniqueDates,'',uniqueCompactors,uniqueItems,uniqueMovements,'',uniquePersons]
 	var items = reverser(logsData);
 	
@@ -65,9 +65,26 @@ const Logs = () => {
 	var uniqueSetter = [setDateSearch,'',setCompactorSearch,setItemSearch,setMovementSearch,'',setPersonSearch]
 
 	function checker(value){
-		console.log(value);
-		return value
+		var toReturn = true
+		var date = new Date(value.createdAt);
+		var currDate = `${date.getDate()}/${
+			date.getMonth() + 1
+		}/${date.getFullYear()}`;
+		var uniqueChecker = [dateSearch,'',compactorSearch,itemSearch,movementSearch,'',personSearch]
+		var checkList = [currDate,'',value.compactorID,'',value.movement,'',value.email]
+		for (var i=0;i<7;i++){
+			if (uniqueChecker[i] != ''){
+				if (uniqueChecker[i] != checkList[i] && uniqueChecker[i] != "all"){
+					toReturn = false
+				}
+			}
+		}
+
+		if (toReturn){
+			return value
+		}
 	}
+
 
 
 	// var storage = new Set();
