@@ -39,17 +39,21 @@ const Logs = () => {
 		var newArray = []
 		for (var i=array.length-1;i>=0;i--){
 			if ("movement" in array[i] && "changedItems" in array[i]){
-				newArray.push(array[i])
+
+				// this changedItems.map is neccessary
+				
+				array[i].changedItems.map((item)=>{
+					newArray.push({changedItem: item.itemName, changedQty: item.itemQuantity,createdAt: array[i].createdAt,email:array[i].email,movement:array[i].movement,username:array[i].username,compactorID:array[i].compactorID})
+
+					uniqueCompactors.add(array[i].compactorID.trim().replace(/`/g, ""));
+					uniquePersons.add(array[i].email.trim().replace(/`/g, ""));
+					uniqueMovements.add(array[i].movement.trim().replace(/`/g, ""));
+					uniqueDates.add(currDate);
+					uniqueItems.add(item.itemName.trim().replace(/`/g, ""))
+				})
+
 				var date = new Date(array[i].createdAt);
 				var currDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-				array[i].changedItems.map((changedItem)=>{
-					uniqueCompactors.add(array[i].compactorID);
-					uniquePersons.add(array[i].email);
-					uniqueMovements.add(array[i].movement);
-					uniqueDates.add(currDate);
-					uniqueItems.add(changedItem.itemName)
-
-				})
 			}
 
 		}
@@ -62,7 +66,9 @@ const Logs = () => {
 	var uniquePersons = new Set().add("all")
 	var uniqueArray = [uniqueDates,'',uniqueCompactors,uniqueItems,uniqueMovements,'',uniquePersons]
 	var items = reverser(logsData);
-	
+
+	console.log(items);
+
 	const [dateSearch, setDateSearch] = useState('');
 	const [compactorSearch, setCompactorSearch] = useState("");
 	const [itemSearch, setItemSearch] = useState('');
@@ -71,6 +77,8 @@ const Logs = () => {
 
 	var uniqueSetter = [setDateSearch,'',setCompactorSearch,setItemSearch,setMovementSearch,'',setPersonSearch]
 
+	// this is the main function that filters the results
+
 	function checker(value){
 		var toReturn = true
 		var date = new Date(value.createdAt);
@@ -78,23 +86,21 @@ const Logs = () => {
 			date.getMonth() + 1
 		}/${date.getFullYear()}`;
 		var uniqueChecker = [dateSearch,'',compactorSearch,itemSearch,movementSearch,'',personSearch]
-		var checkList = [currDate,'',value.compactorID,'',value.movement,'',value.email]
-		for (var i=0;i<7;i++){
+
+		// for each entry in changedItems, I want to create a new array to check through
+		var checkList = [currDate,'',value.compactorID,value.changedItem,value.movement,'',value.email]
+			for (var i=0;i<7;i++){
 			if (uniqueChecker[i] != ''){
-				if (uniqueChecker[i] != checkList[i] && uniqueChecker[i] != "all"){
+				if (uniqueChecker[i] != checkList[i] && uniqueChecker[i] != "all"){ // this is that logic
 					toReturn = false
 				}
 			}
 		}
-
 		if (toReturn){
 			return value
 		}
 	}
 
-
-
-	// var storage = new Set();
 	
 	return (
 		<div>
@@ -115,7 +121,6 @@ const Logs = () => {
 									return (
 										<select name={val} id={index} onChange={(event)=>{
 											uniqueSetter[index](event.target.value)
-											console.log();
 										}}>{[...data].map((o)=>{
 											return <option>{o}</option>
 										})}</select>
@@ -133,7 +138,7 @@ const Logs = () => {
 				<tbody>
 					{items
 						.filter((val) => {
-							if ("movement" in val && "changedItems" in val) {
+							if ("movement" in val && "changedItem" in val) {
 								return checker(val)
 							}
 						})
@@ -143,19 +148,15 @@ const Logs = () => {
 								date.getMonth() + 1
 							}/${date.getFullYear()}`;
 							return (
-								val.changedItems.map((changedItem)=>{
-								return (
-									<tr>
-										<td>{currDate}</td>
-										<td>{`${date.getHours()}${addZero(date.getMinutes())}`}</td>
-										<td>{val.compactorID}</td>
-										<td>{changedItem.itemName}</td>
-										<td>{val.movement}</td>
-										<td>{changedItem.itemQuantity}</td>
-										<td>{val.email}</td>
-									</tr>
-								);
-							})
+								<tr>
+									<td>{currDate}</td>
+									<td>{`${date.getHours()}${addZero(date.getMinutes())}`}</td>
+									<td>{val.compactorID}</td>
+									<td>{val.changedItem}</td>
+									<td>{val.movement}</td>
+									<td>{val.changedQty}</td>
+									<td>{val.email}</td>
+								</tr>
 
 							)
 						})}
