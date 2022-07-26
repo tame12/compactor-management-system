@@ -73,7 +73,6 @@ const StockIn = (props) => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)
-        //perhaps i can replace payload with the actual correct data? but if i do that i'll have to do the logic here which seems difficult
       })
       alert(`sent to compactor status:${response.status}`)
       return response.json();
@@ -116,10 +115,10 @@ const StockIn = (props) => {
 
 
         const compactorPayload = {
-          "inOrOut": "in",
           "compactorID": compactor,
           "changedItems": items, // keep in mind that the items that are changed here will be directly sent to the payload
-          "items": items // has to be named "items"
+          "items": items, // has to be named "items"
+          "movement": 'Stock-In'
         }
         // const compactorStatus = sendToCompactor(compactorPayload)
         // const compactorStatus = sendToCompactor(compactorPayload, compactor)
