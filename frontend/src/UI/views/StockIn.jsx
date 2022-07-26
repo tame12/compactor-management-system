@@ -120,8 +120,7 @@ const StockIn = (props) => {
           "items": items, // has to be named "items"
           "movement": 'Stock-In'
         }
-        // const compactorStatus = sendToCompactor(compactorPayload)
-        // const compactorStatus = sendToCompactor(compactorPayload, compactor)
+        const compactorStatus = sendToCompactor(compactorPayload, compactor)
       }
     }
     catch(error){
