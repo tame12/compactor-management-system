@@ -39,7 +39,7 @@ const Logs = () => {
 				// this changedItems.map is neccessary
 				
 				array[i].changedItems.map((item)=>{
-					newArray.push({changedItem: item.itemName, changedQty: item.itemQuantity,createdAt: array[i].createdAt,email:array[i].email,movement:array[i].movement,username:array[i].username,compactorID:array[i].compactorID})
+					newArray.push({changedItem: item.itemName.trim().replace(/`/g, ""), changedQty: item.itemQuantity,createdAt: array[i].createdAt,email:array[i].email,movement:array[i].movement,username:array[i].username,compactorID:array[i].compactorID})
 
 					uniqueCompactors.add(array[i].compactorID.trim().replace(/`/g, ""));
 					uniquePersons.add(array[i].email.trim().replace(/`/g, ""));
@@ -93,7 +93,6 @@ const Logs = () => {
 			return value
 		}
 	}
-
 	
 	return (
 		<div>
