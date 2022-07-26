@@ -72,13 +72,20 @@ We aim to make asset management easy, by enabling physiotherapists to track, ana
 
 ## Packages and Libraries Used
 ### Frontend (General)
-* [react-router-dom](https://v5.reactrouter.com/web/guides/quick-start)
-* [react-boostrap](https://react-bootstrap.github.io/components/navbar/)
-* [react-router-bootstrap](https://github.com/react-bootstrap/react-router-bootstrap)
-* [material-ui](https://mui.com/material-ui/getting-started/overview/)
+* [react-router-dom](https://v5.reactrouter.com/web/guides/quick-start) - For routing to different pages
+* [react-boostrap](https://react-bootstrap.github.io/components/navbar/) - Component library using bootstrap
+* [react-router-bootstrap](https://github.com/react-bootstrap/react-router-bootstrap) - For linking React router dom to react bootstrap components
+
 
 ### Backend
-* [Nodemon](https://www.npmjs.com/package/nodemon)
+* [Nodemon](https://www.npmjs.com/package/nodemon) - Refresh server whenever there are changes
+* [Mongoose](https://mongoosejs.com/) - MongoDB object modelling for node.js
+* [Google API Authentication](https://developers.google.com/identity/protocols/oauth2
+) - For logging in and authentication
+
+
+
+
 
 ### Dashboard Page 
 * [Recharts](https://recharts.org/en-US/guide)
@@ -89,6 +96,7 @@ We aim to make asset management easy, by enabling physiotherapists to track, ana
 ## Create the .env file
 Create your [Google Client ID](https://youtu.be/75aTZq-qoZk?t=376) and add it in a .env file as REACT_APP_GOOGLE_CLIENT_ID in the root folder. Complete the same for the MONGO_URI.
 ## To start our application locally,
+1. If you do not have node or npm, please install [node](https://nodejs.org/en/download/) and [npm](https://www.npmjs.com/)
 1. Ensure a copy of the .env file in the root directory
 1. Open a new Terminal and run the following to setup an API connection with MongoDB
 
@@ -97,7 +105,7 @@ npm install
 npm run serve
 ```
 
-4. Run the following in a new terminal:
+4. Run the following in another new terminal:
 ```bash
 cd frontend
 npm install
