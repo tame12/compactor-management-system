@@ -1,1 +1,1 @@
-web: npm run heroku-custom-start
+web: cd frontend & npm run heroku-custom-start
